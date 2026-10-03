@@ -1,0 +1,1979 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  font-family: "Inter", Arial, sans-serif;
+  color: #111;
+  background: #f2f1ed;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f2f1ed;
+  color: #111;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #111;
+  color: #f2f1ed;
+}
+
+/* =========================================
+   LOADER
+========================================= */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #111;
+  color: #f2f1ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 4vw;
+  clip-path: inset(0 0 0 0);
+}
+
+.loader-brand {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.loader-content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.loader-label {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.loader-number {
+  font-size: clamp(100px, 18vw, 280px);
+  font-weight: 800;
+  letter-spacing: -0.09em;
+  line-height: 0.7;
+}
+
+.loader-line {
+  width: 100%;
+  height: 1px;
+  background: #555;
+}
+
+/* =========================================
+   CURSOR
+========================================= */
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+
+  background: #fff;
+  color: #111;
+
+  z-index: 9000;
+
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: translate(-50%, -50%);
+
+  mix-blend-mode: difference;
+
+  will-change: transform, width, height;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+.custom-cursor span {
+  font-size: 17px;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.cursor-invert span {
+  transform: rotate(45deg) scale(1.15);
+}
+
+/*
+  Cahaya biru/hijau lama di belakang cursor
+  sengaja dimatikan.
+*/
+
+.mouse-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 1px;
+  height: 1px;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 0;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  padding: 28px 4vw;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  z-index: 100;
+
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+
+.logo {
+  font-family: "Inter", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 35px;
+}
+
+.navbar nav a {
+  position: relative;
+}
+
+.navbar nav a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+
+  width: 0;
+  height: 1px;
+
+  background: #111;
+
+  transition: width 0.3s ease;
+}
+
+.navbar nav a:hover::after {
+  width: 100%;
+}
+
+.menu-status {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-status span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #111;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+  height: 100vh;
+  min-height: 700px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 0 4vw 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: -10%;
+
+  opacity: 0.18;
+
+  background-image:
+    linear-gradient(
+      rgba(17, 17, 17, 0.25) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(17, 17, 17, 0.25) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  transform:
+    perspective(500px)
+    rotateX(55deg)
+    scale(1.5);
+
+  transform-origin: center bottom;
+}
+
+.hero-background-shape {
+  position: absolute;
+
+  width: 42vw;
+  height: 42vw;
+
+  min-width: 400px;
+  min-height: 400px;
+
+  right: -10vw;
+  top: 18%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #d7ff55,
+      transparent 50%
+    ),
+    #111;
+
+  filter: blur(1px);
+
+  opacity: 0.9;
+
+  will-change: transform;
+}
+
+.hero-content {
+  position: relative;
+
+  z-index: 5;
+
+  padding-top: 22vh;
+}
+
+.hero-eyebrow {
+  display: flex;
+  justify-content: space-between;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  margin-bottom: 40px;
+
+  max-width: 100%;
+}
+
+.hero-title {
+  font-size: clamp(90px, 13.5vw, 205px);
+
+  line-height: 0.77;
+
+  letter-spacing: -0.09em;
+
+  font-weight: 800;
+
+  position: relative;
+
+  z-index: 5;
+
+  /*
+    Tambahan ruang supaya WE tidak kepotong
+    ketika animasi masuk / parallax berjalan.
+  */
+  padding-top: 0.08em;
+
+  overflow: visible;
+}
+
+.hero-word-wrapper {
+  /*
+    Sebelumnya terlalu ketat sehingga
+    bagian WE bisa terlihat kepotong.
+  */
+
+  overflow: visible;
+
+  width: max-content;
+
+  padding-top: 0.05em;
+
+  margin-top: -0.05em;
+
+  position: relative;
+}
+
+.hero-word {
+  display: block;
+
+  will-change: transform;
+
+  padding-right: 0.08em;
+}
+
+.hero-indent {
+  padding-left: 12vw;
+}
+
+.hero-dot {
+  color: #d7ff55;
+}
+
+.hero-description {
+  position: absolute;
+
+  right: 3vw;
+  bottom: -4vw;
+
+  z-index: 6;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+.hero-floating {
+  position: absolute;
+
+  z-index: 7;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  border: 1px solid #111;
+
+  border-radius: 100px;
+
+  padding: 12px 17px;
+
+  background: #f2f1ed;
+}
+
+.floating-one {
+  top: 34%;
+  right: 18%;
+}
+
+.floating-two {
+  top: 55%;
+  right: 7%;
+}
+
+.floating-three {
+  top: 67%;
+  right: 24%;
+}
+
+.hero-bottom {
+  position: relative;
+
+  z-index: 10;
+
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: end;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+}
+
+.hero-location {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  background: #111;
+
+  border-radius: 50%;
+
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+.scroll-arrow {
+  font-size: 20px;
+
+  animation: scrollBounce 1.5s infinite;
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.hero-services {
+  text-align: right;
+}
+
+/* =========================================
+   GLOBAL SECTIONS
+========================================= */
+
+.section {
+  padding: 140px 4vw;
+}
+
+.section-label {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  border-top: 1px solid #111;
+
+  padding-top: 12px;
+
+  margin-bottom: 100px;
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+  min-height: 90vh;
+
+  display: grid;
+
+  grid-template-columns: 1fr 2fr;
+
+  gap: 50px;
+}
+
+.intro-content {
+  max-width: 1100px;
+}
+
+.intro-content > p:first-child {
+  font-size: clamp(38px, 5vw, 80px);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 600;
+
+  max-width: 1000px;
+}
+
+.intro-small {
+  margin-top: 100px;
+
+  max-width: 450px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   WORK
+========================================= */
+
+.work {
+  background: #111;
+
+  color: #f2f1ed;
+}
+
+.work .section-label {
+  border-color: #f2f1ed;
+}
+
+.projects {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 130px;
+}
+
+.project-card {
+  cursor: pointer;
+}
+
+.project-visual {
+  height: 72vh;
+
+  min-height: 500px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card:hover .project-visual {
+  transform: scale(0.985);
+}
+
+.project-one {
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      #f4a261 0,
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #2a2a2a,
+      #111
+    );
+}
+
+.project-two {
+  background:
+    radial-gradient(
+      circle at 25% 70%,
+      #d8f3dc 0,
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #292929,
+      #111
+    );
+}
+
+.project-three {
+  background:
+    radial-gradient(
+      circle at 75% 65%,
+      #bde0fe 0,
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #252525,
+      #111
+    );
+}
+
+.visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.15;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    );
+
+  background-size: 70px 70px;
+}
+
+.visual-orb {
+  width: 30vw;
+  height: 30vw;
+
+  min-width: 260px;
+  min-height: 260px;
+
+  border-radius: 50%;
+
+  background: #f2f1ed;
+
+  mix-blend-mode: difference;
+
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.8s ease;
+}
+
+.project-card:hover .visual-orb {
+  transform:
+    scale(1.25)
+    rotate(20deg);
+
+  border-radius: 30%;
+}
+
+.visual-title {
+  position: absolute;
+
+  font-size: clamp(80px, 15vw, 220px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.08em;
+
+  mix-blend-mode: difference;
+
+  color: #fff;
+}
+
+.visual-arrow {
+  position: absolute;
+
+  right: 30px;
+  top: 30px;
+
+  font-size: 35px;
+
+  transition:
+    transform 0.4s ease;
+}
+
+.project-card:hover .visual-arrow {
+  transform:
+    translate(8px, -8px);
+}
+
+.project-info {
+  padding-top: 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+}
+
+.project-info > div:first-child {
+  display: flex;
+
+  gap: 20px;
+
+  align-items: baseline;
+}
+
+.project-info h3 {
+  font-family: "Inter", sans-serif;
+
+  font-size: 28px;
+
+  letter-spacing: -0.05em;
+}
+
+.project-type {
+  text-align: right;
+}
+
+/* =========================================
+   MARQUEE
+========================================= */
+
+.marquee {
+  background: #f2f1ed;
+
+  color: #111;
+
+  overflow: hidden;
+
+  padding: 35px 0;
+
+  border-bottom: 1px solid #111;
+}
+
+.marquee-track {
+  width: max-content;
+
+  display: flex;
+
+  white-space: nowrap;
+
+  font-size: clamp(55px, 9vw, 130px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.07em;
+
+  font-weight: 700;
+}
+
+/* =========================================
+   SERVICES
+========================================= */
+
+.services {
+  min-height: 100vh;
+}
+
+.services-heading {
+  margin-bottom: 130px;
+}
+
+.services-heading h2 {
+  font-size: clamp(90px, 15vw, 220px);
+
+  line-height: 0.78;
+
+  letter-spacing: -0.09em;
+}
+
+.services-heading h2 span {
+  padding-left: 12vw;
+}
+
+.service-list {
+  border-top: 1px solid #111;
+}
+
+.service-item {
+  display: grid;
+
+  grid-template-columns: 80px 1fr 60px;
+
+  align-items: center;
+
+  min-height: 110px;
+
+  border-bottom: 1px solid #111;
+
+  transition:
+    padding 0.4s ease,
+    background 0.4s ease;
+
+  font-family: "DM Mono", monospace;
+}
+
+.service-item:hover {
+  padding: 0 25px;
+
+  background: #111;
+
+  color: #f2f1ed;
+}
+
+.service-item h3 {
+  font-family: "Inter", sans-serif;
+
+  font-size: clamp(25px, 4vw, 60px);
+
+  letter-spacing: -0.05em;
+
+  font-weight: 500;
+}
+
+.service-arrow {
+  text-align: right;
+
+  font-size: 25px;
+}
+
+/* =========================================
+   STATEMENT
+========================================= */
+
+.statement {
+  min-height: 100vh;
+
+  background: #111;
+
+  color: #f2f1ed;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.statement-content {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.statement-word {
+  display: block;
+
+  font-size: clamp(80px, 15vw, 230px);
+
+  line-height: 0.78;
+
+  font-weight: 800;
+
+  letter-spacing: -0.09em;
+}
+
+.statement-word:nth-child(2) {
+  padding-left: 12vw;
+}
+
+.statement-word:nth-child(3) {
+  padding-left: 4vw;
+}
+
+.statement-word:nth-child(4) {
+  padding-left: 20vw;
+}
+
+.statement-word.outline {
+  color: transparent;
+
+  -webkit-text-stroke: 2px #f2f1ed;
+}
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact {
+  min-height: 100vh;
+
+  background: #d7ff55;
+}
+
+.contact-content {
+  text-align: center;
+}
+
+.contact-small {
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+
+  margin-bottom: 60px;
+}
+
+.contact-content h2 {
+  font-size: clamp(80px, 15vw, 230px);
+
+  line-height: 0.75;
+
+  letter-spacing: -0.09em;
+
+  font-weight: 800;
+}
+
+.contact-content h2 span {
+  color: transparent;
+
+  -webkit-text-stroke: 2px #111;
+}
+
+.contact-button {
+  display: inline-flex;
+
+  gap: 30px;
+
+  align-items: center;
+
+  margin-top: 100px;
+
+  border: 1px solid #111;
+
+  border-radius: 100px;
+
+  padding: 20px 30px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.contact-button:hover {
+  background: #111;
+
+  color: #d7ff55;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+  background: #111;
+
+  color: #f2f1ed;
+
+  padding: 60px 4vw 25px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+}
+
+.footer-top {
+  min-height: 300px;
+
+  display: grid;
+
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.footer-logo {
+  font-family: "Inter", sans-serif;
+
+  font-size: clamp(50px, 8vw, 120px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.08em;
+}
+
+.footer-bottom {
+  border-top: 1px solid #555;
+
+  padding-top: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .custom-cursor,
+  .mouse-spotlight {
+    display: none;
+  }
+
+  .loader {
+    padding: 25px 20px;
+  }
+
+  .loader-brand {
+    font-size: 24px;
+  }
+
+  .loader-number {
+    font-size: 28vw;
+  }
+
+  .navbar {
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .navbar nav {
+    display: none;
+  }
+
+  .menu-status {
+    font-size: 9px;
+  }
+
+  .hero {
+    min-height: 100svh;
+
+    padding: 0 20px 25px;
+  }
+
+  .hero-content {
+    padding-top: 25vh;
+  }
+
+  .hero-eyebrow {
+    font-size: 8px;
+
+    margin-bottom: 35px;
+  }
+
+  .hero-title {
+    font-size: 20vw;
+
+    line-height: 0.8;
+
+    /*
+      Extra safety supaya WE
+      tidak kepotong di layar kecil.
+    */
+    padding-left: 2px;
+  }
+
+  .hero-word-wrapper {
+    padding-top: 0.06em;
+
+    margin-top: -0.06em;
+  }
+
+  .hero-word {
+    padding-right: 0.12em;
+  }
+
+  .hero-indent {
+    padding-left: 7vw;
+  }
+
+  .hero-description {
+    position: relative;
+
+    right: auto;
+    bottom: auto;
+
+    margin-top: 50px;
+
+    font-size: 9px;
+  }
+
+  .hero-floating {
+    display: none;
+  }
+
+  .hero-bottom {
+    grid-template-columns: 1fr auto;
+
+    gap: 20px;
+  }
+
+  .hero-services {
+    display: none;
+  }
+
+  .section {
+    padding: 90px 20px;
+  }
+
+  .section-label {
+    margin-bottom: 60px;
+  }
+
+  .intro {
+    display: block;
+
+    min-height: auto;
+  }
+
+  .intro-content > p:first-child {
+    font-size: 11vw;
+  }
+
+  .intro-small {
+    margin-top: 70px;
+  }
+
+  .project-visual {
+    height: 55vh;
+
+    min-height: 400px;
+  }
+
+  .visual-orb {
+    width: 55vw;
+    height: 55vw;
+  }
+
+  .visual-title {
+    font-size: 24vw;
+  }
+
+  .project-info {
+    gap: 15px;
+  }
+
+  .project-info h3 {
+    font-size: 20px;
+  }
+
+  .project-type {
+    max-width: 120px;
+  }
+
+  .projects {
+    gap: 80px;
+  }
+
+  .marquee-track {
+    font-size: 18vw;
+  }
+
+  .services-heading {
+    margin-bottom: 80px;
+  }
+
+  .services-heading h2 {
+    font-size: 20vw;
+  }
+
+  .service-item {
+    grid-template-columns: 45px 1fr 35px;
+
+    min-height: 90px;
+  }
+
+  .service-item h3 {
+    font-size: 6vw;
+  }
+
+  .statement {
+    min-height: 80vh;
+  }
+
+  .statement-word {
+    font-size: 19vw;
+  }
+
+  .statement-word:nth-child(2) {
+    padding-left: 7vw;
+  }
+
+  .statement-word:nth-child(3) {
+    padding-left: 2vw;
+  }
+
+  .statement-word:nth-child(4) {
+    padding-left: 10vw;
+  }
+
+  .contact {
+    min-height: 80vh;
+  }
+
+  .contact-content h2 {
+    font-size: 20vw;
+  }
+
+  .contact-button {
+    margin-top: 70px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 50px;
+  }
+
+  .footer-logo {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+}/* =====================================================
+   REAL MOUSE INVERT
+   DARK MODE
+===================================================== */
+
+/* Cursor utama */
+.custom-cursor {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  /*
+    INI YANG MEMBUAT AREA DI BAWAH CURSOR
+    BENAR-BENAR TERINVERT
+  */
+  mix-blend-mode: difference;
+
+  color: #000;
+
+  pointer-events: none;
+
+  z-index: 99999;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  will-change:
+    transform,
+    width,
+    height;
+
+  /*
+    smooth ketika membesar
+  */
+  transition:
+    width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================
+   SAAT MOUSE MELEWATI TEXT
+========================================= */
+
+.custom-cursor.cursor-invert {
+  width: 110px;
+  height: 110px;
+}
+
+
+/* =========================================
+   ICON CURSOR
+========================================= */
+
+.custom-cursor span {
+  color: #ffffff;
+
+  font-size: 17px;
+
+  opacity: 0.95;
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.custom-cursor.cursor-invert span {
+  transform: rotate(45deg) scale(1.15);
+}
+
+
+/* =========================================
+   MATIKAN CAHAYA LAMA
+========================================= */
+
+.mouse-spotlight {
+  display: none !important;
+}
+
+
+/* =========================================
+   PASTIKAN BODY TIDAK MENGGANGGU
+========================================= */
+
+body {
+  isolation: isolate;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none;
+  }
+
+  .mouse-spotlight {
+    display: none !important;
+  }
+}/* =====================================================
+   PROJECT INTERACTION
+===================================================== */
+
+.project-card {
+  perspective: 1400px;
+}
+
+.project-visual {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visual-orb {
+  will-change: transform;
+}
+
+.visual-title {
+  will-change: transform;
+}
+
+.project-hover-label {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -35%);
+
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  padding: 18px 24px;
+
+  border: 1px solid rgba(255,255,255,0.7);
+
+  border-radius: 100px;
+
+  background: rgba(0,0,0,0.2);
+
+  backdrop-filter: blur(12px);
+
+  color: #fff;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  white-space: nowrap;
+
+  z-index: 10;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-hover-label span:last-child {
+  font-size: 18px;
+}
+
+.project-card:hover .project-hover-label {
+  background: rgba(255,255,255,0.08);
+
+  border-color: #fff;
+}
+
+.project-description {
+  max-width: 500px;
+
+  margin-top: 15px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  color: rgba(255,255,255,0.55);
+}
+
+.project-tags {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 15px;
+}
+
+.project-tags span {
+  padding: 7px 10px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  border-radius: 100px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  color: rgba(255,255,255,0.65);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-card:hover .project-tags span {
+  border-color: rgba(255,255,255,0.6);
+
+  color: #fff;
+}
+
+
+/* =====================================================
+   CURSOR VIEW
+===================================================== */
+
+.custom-cursor strong {
+  position: absolute;
+
+  opacity: 0;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.08em;
+
+  font-weight: 400;
+
+  transform: scale(0.7);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.cursor-view strong {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.custom-cursor.cursor-view span {
+  opacity: 0;
+}
+
+
+/* =====================================================
+   PROJECT MODAL
+===================================================== */
+
+.project-modal-layer {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  color: #f2f2f2;
+}
+
+.project-modal-backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0,0,0,0.8);
+
+  backdrop-filter: blur(15px);
+
+  opacity: 0;
+}
+
+.project-modal {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1400px, 94vw);
+
+  height: min(90vh, 900px);
+
+  overflow-y: auto;
+
+  background: #0b0c10;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  padding: 30px;
+
+  opacity: 0;
+
+  transform-origin: center;
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 25px;
+  right: 25px;
+
+  z-index: 20;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 15px;
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  border-radius: 100px;
+
+  background: rgba(11,12,16,0.7);
+
+  color: #fff;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.modal-close span {
+  font-size: 18px;
+
+  line-height: 0.5;
+}
+
+.modal-close:hover {
+  background: #fff;
+
+  color: #0b0c10;
+}
+
+.modal-content {
+  min-height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.modal-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: rgba(255,255,255,0.55);
+}
+
+.modal-visual {
+  position: relative;
+
+  height: 48vh;
+
+  min-height: 350px;
+
+  margin-top: 20px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.modal-visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.15;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.5) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.5) 1px,
+      transparent 1px
+    );
+
+  background-size: 70px 70px;
+}
+
+.modal-visual-shape {
+  width: 22vw;
+  height: 22vw;
+
+  min-width: 220px;
+  min-height: 220px;
+
+  border-radius: 40% 60% 55% 45%;
+
+  background: #f2f2f2;
+
+  mix-blend-mode: difference;
+
+  animation: modalShape 7s ease-in-out infinite alternate;
+}
+
+@keyframes modalShape {
+  0% {
+    border-radius: 40% 60% 55% 45%;
+
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    border-radius: 60% 40% 45% 55%;
+
+    transform: rotate(12deg) scale(1.08);
+  }
+}
+
+.modal-visual > span {
+  position: absolute;
+
+  font-size: clamp(80px, 14vw, 200px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.09em;
+
+  color: #fff;
+
+  mix-blend-mode: difference;
+}
+
+.modal-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 60px;
+
+  padding: 55px 0;
+
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.modal-label {
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: rgba(255,255,255,0.5);
+
+  margin-bottom: 20px;
+}
+
+.modal-info h2 {
+  font-size: clamp(70px, 9vw, 130px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.08em;
+}
+
+.modal-description {
+  align-self: end;
+}
+
+.modal-description > p {
+  max-width: 500px;
+
+  font-size: 20px;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.03em;
+}
+
+.modal-stack {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 35px;
+}
+
+.modal-stack span {
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  border-radius: 100px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+}
+
+.modal-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-top: 20px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: rgba(255,255,255,0.45);
+}
+
+
+/* =====================================================
+   MOBILE PROJECT
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .project-hover-label {
+    display: none;
+  }
+
+  .project-description {
+    display: none;
+  }
+
+  .project-tags {
+    display: none;
+  }
+
+  .project-modal-layer {
+    padding: 10px;
+  }
+
+  .project-modal {
+    width: 100%;
+
+    height: 94vh;
+
+    padding: 20px;
+  }
+
+  .modal-close {
+    top: 15px;
+    right: 15px;
+  }
+
+  .modal-visual {
+    height: 40vh;
+
+    min-height: 300px;
+  }
+
+  .modal-visual-shape {
+    width: 55vw;
+    height: 55vw;
+  }
+
+  .modal-info {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+
+    padding: 40px 0;
+  }
+
+  .modal-info h2 {
+    font-size: 25vw;
+  }
+
+  .modal-description > p {
+    font-size: 17px;
+  }
+
+  .modal-footer {
+    gap: 20px;
+
+    flex-direction: column;
+  }
+}/* =====================================================
+   DARK MODE — HERO / LANDING ONLY
+   UI & LAYOUT TETAP
+===================================================== */
+
+.hero {
+  background: #111;
+  color: #f2f1ed;
+}
+
+.navbar {
+  color: #f2f1ed;
+}
+
+.navbar nav a::after {
+  background: #f2f1ed;
+}
+
+.menu-status span {
+  background: #f2f1ed;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(
+      rgba(242, 241, 237, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(242, 241, 237, 0.18) 1px,
+      transparent 1px
+    );
+}
+
+.hero-floating {
+  border-color: #f2f1ed;
+  background: #111;
+  color: #f2f1ed;
+}
+
+.status-dot {
+  background: #f2f1ed;
+}
+
+.hero-background-shape {
+  /* bentuk & animasi TETAP, cuma mode warnanya gelap */
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #d7ff55,
+      transparent 50%
+    ),
+    #111;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    background: #111;
+    color: #f2f1ed;
+  }
+}
