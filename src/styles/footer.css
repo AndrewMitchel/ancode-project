@@ -1,0 +1,43 @@
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+  background: #111;
+
+  color: #f2f1ed;
+
+  padding: 60px 4vw 25px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+}
+
+.footer-top {
+  min-height: 300px;
+
+  display: grid;
+
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.footer-logo {
+  font-family: "Inter", sans-serif;
+
+  font-size: clamp(50px, 8vw, 120px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.08em;
+}
+
+.footer-bottom {
+  border-top: 1px solid #555;
+
+  padding-top: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+}

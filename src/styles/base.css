@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  font-family: "Inter", Arial, sans-serif;
+  color: #111;
+  background: #f2f1ed;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f2f1ed;
+  color: #111;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #111;
+  color: #f2f1ed;
+}

@@ -1,0 +1,31 @@
+/* =========================================
+   MARQUEE
+========================================= */
+
+.marquee {
+  background: #f2f1ed;
+
+  color: #111;
+
+  overflow: hidden;
+
+  padding: 35px 0;
+
+  border-bottom: 1px solid #111;
+}
+
+.marquee-track {
+  width: max-content;
+
+  display: flex;
+
+  white-space: nowrap;
+
+  font-size: clamp(55px, 9vw, 130px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.07em;
+
+  font-weight: 700;
+}

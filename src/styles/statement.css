@@ -1,0 +1,55 @@
+/* =========================================
+   STATEMENT
+========================================= */
+
+.statement {
+  min-height: 100vh;
+
+  background: #111;
+
+  color: #f2f1ed;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.statement-content {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.statement-word {
+  display: block;
+
+  font-size: clamp(80px, 15vw, 230px);
+
+  line-height: 0.78;
+
+  font-weight: 800;
+
+  letter-spacing: -0.09em;
+}
+
+.statement-word:nth-child(2) {
+  padding-left: 12vw;
+}
+
+.statement-word:nth-child(3) {
+  padding-left: 4vw;
+}
+
+.statement-word:nth-child(4) {
+  padding-left: 20vw;
+}
+
+.statement-word.outline {
+  color: transparent;
+
+  -webkit-text-stroke: 2px #f2f1ed;
+}

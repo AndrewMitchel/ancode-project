@@ -1,0 +1,67 @@
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact {
+  min-height: 100vh;
+
+  background: #d7ff55;
+}
+
+.contact-content {
+  text-align: center;
+}
+
+.contact-small {
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+
+  margin-bottom: 60px;
+}
+
+.contact-content h2 {
+  font-size: clamp(80px, 15vw, 230px);
+
+  line-height: 0.75;
+
+  letter-spacing: -0.09em;
+
+  font-weight: 800;
+}
+
+.contact-content h2 span {
+  color: transparent;
+
+  -webkit-text-stroke: 2px #111;
+}
+
+.contact-button {
+  display: inline-flex;
+
+  gap: 30px;
+
+  align-items: center;
+
+  margin-top: 100px;
+
+  border: 1px solid #111;
+
+  border-radius: 100px;
+
+  padding: 20px 30px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.contact-button:hover {
+  background: #111;
+
+  color: #d7ff55;
+}

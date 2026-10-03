@@ -1,0 +1,371 @@
+/* =====================================================
+   DARK MODE OVERRIDE
+===================================================== */
+
+:root {
+  background: #0b0c10;
+  color: #f2f2f2;
+}
+
+body {
+  background: #0b0c10;
+  color: #f2f2f2;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+  color: #f2f2f2;
+}
+
+.navbar nav a::after {
+  background: #f2f2f2;
+}
+
+.menu-status span {
+  background: #f2f2f2;
+}
+
+/* =========================================
+   HERO DARK
+========================================= */
+
+.hero {
+  background: #0b0c10;
+  color: #f2f2f2;
+}
+
+.hero-grid {
+  opacity: 0.12;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.15) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.15) 1px,
+      transparent 1px
+    );
+}
+
+/* =========================================
+   HERO ABSTRACT SHAPE
+========================================= */
+
+.hero-background-shape {
+  width: 43vw;
+  height: 43vw;
+
+  right: -7vw;
+  top: 18%;
+
+  border-radius:
+    42% 58% 65% 35%
+    /
+    38% 40% 60% 62%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(80, 120, 255, 0.95),
+      rgba(45, 65, 150, 0.8) 35%,
+      rgba(20, 25, 50, 0.95) 70%,
+      #08090d 100%
+    );
+
+  filter: blur(0.5px);
+
+  box-shadow:
+    0 0 120px rgba(70, 100, 255, 0.18);
+
+  animation: abstractFloat 8s ease-in-out infinite alternate;
+}
+
+@keyframes abstractFloat {
+  0% {
+    border-radius:
+      42% 58% 65% 35%
+      /
+      38% 40% 60% 62%;
+
+    transform: rotate(-5deg) scale(1);
+  }
+
+  50% {
+    border-radius:
+      58% 42% 35% 65%
+      /
+      50% 65% 35% 50%;
+
+    transform: rotate(5deg) scale(1.04);
+  }
+
+  100% {
+    border-radius:
+      35% 65% 48% 52%
+      /
+      60% 35% 65% 40%;
+
+    transform: rotate(-2deg) scale(0.98);
+  }
+}
+
+/* =========================================
+   HERO TEXT
+========================================= */
+
+.hero-eyebrow {
+  color: #f2f2f2;
+}
+
+.hero-word {
+  color: #f2f2f2;
+}
+
+.hero-dot {
+  color: #547cff;
+}
+
+.hero-description {
+  color: #f2f2f2;
+}
+
+.hero-floating {
+  background: #0b0c10;
+  color: #f2f2f2;
+  border-color: #f2f2f2;
+}
+
+.hero-location {
+  color: #f2f2f2;
+}
+
+.status-dot {
+  background: #f2f2f2;
+}
+
+.scroll-indicator {
+  color: #f2f2f2;
+}
+
+.hero-services {
+  color: #f2f2f2;
+}
+
+/* =========================================
+   INTRO DARK
+========================================= */
+
+.intro {
+  background: #0b0c10;
+  color: #f2f2f2;
+}
+
+.intro .section-label {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #f2f2f2;
+}
+
+.intro-content > p:first-child {
+  color: #f2f2f2;
+}
+
+.intro-small {
+  color: rgba(242, 242, 242, 0.7);
+}
+
+/* =========================================
+   SMOOTH TEXT INVERT
+========================================= */
+
+.custom-cursor {
+  background: #ffffff;
+
+  mix-blend-mode: difference;
+
+  transition:
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.cursor-invert {
+  width: 105px;
+  height: 105px;
+}
+
+.custom-cursor span {
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+
+.custom-cursor.cursor-invert span {
+  transform: rotate(45deg) scale(1.2);
+}
+
+.mouse-spotlight {
+  display: none !important;
+}
+
+/* =========================================
+   PRODUCT
+========================================= */
+
+.product {
+  background: #111217;
+  color: #f2f2f2;
+}
+
+.product .section-label {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* =========================================
+   MARQUEE
+========================================= */
+
+.marquee {
+  background: #0b0c10;
+  color: #f2f2f2;
+
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================
+   SERVICES
+========================================= */
+
+.services {
+  background: #0b0c10;
+  color: #f2f2f2;
+}
+
+.services .section-label {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.services-heading h2 {
+  color: #f2f2f2;
+}
+
+.service-list {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.service-item {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.service-item:hover {
+  background: #f2f2f2;
+  color: #0b0c10;
+}
+
+/* =========================================
+   STATEMENT
+========================================= */
+
+.statement {
+  background: #050609;
+  color: #f2f2f2;
+}
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact {
+  background: #547cff;
+  color: #050609;
+}
+
+.contact-content h2 {
+  color: #050609;
+}
+
+.contact-content h2 span {
+  -webkit-text-stroke-color: #050609;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+  background: #050609;
+  color: #f2f2f2;
+}
+
+.footer-bottom {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================
+   WE FIX
+========================================= */
+
+.hero-title {
+  overflow: visible;
+
+  padding-top: 0.14em;
+  padding-bottom: 0.08em;
+
+  line-height: 0.82;
+}
+
+.hero-word-wrapper {
+  overflow: visible;
+
+  padding-top: 0.08em;
+  padding-bottom: 0.04em;
+
+  margin-top: -0.03em;
+}
+
+.hero-word {
+  overflow: visible;
+
+  padding-top: 0.03em;
+  padding-right: 0.12em;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .hero {
+    background: #0b0c10;
+  }
+
+  .hero-background-shape {
+    width: 75vw;
+    height: 75vw;
+
+    right: -20vw;
+    top: 25%;
+  }
+
+  .hero-title {
+    padding-top: 0.16em;
+    padding-bottom: 0.1em;
+  }
+
+  .hero-word-wrapper {
+    padding-top: 0.1em;
+  }
+
+  .intro {
+    background: #0b0c10;
+  }
+
+  .services {
+    background: #0b0c10;
+  }
+}

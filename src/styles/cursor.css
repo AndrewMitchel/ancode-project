@@ -1,0 +1,68 @@
+/* =========================================
+   CURSOR
+========================================= */
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+
+  background: #fff;
+  color: #111;
+
+  z-index: 9000;
+
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: translate(-50%, -50%);
+
+  mix-blend-mode: difference;
+
+  will-change: transform, width, height;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    width 0.35s ease,
+    height 0.35s ease;
+}
+
+.custom-cursor span {
+  font-size: 17px;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.cursor-invert span {
+  transform: rotate(45deg) scale(1.15);
+}
+
+/*
+  Cahaya biru/hijau lama di belakang cursor
+  sengaja dimatikan.
+*/
+
+.mouse-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 1px;
+  height: 1px;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 0;
+}

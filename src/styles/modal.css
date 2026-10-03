@@ -1,0 +1,694 @@
+/* =====================================================
+   REAL MOUSE INVERT
+   DARK MODE
+===================================================== */
+
+/* Cursor utama */
+.custom-cursor {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  /*
+    INI YANG MEMBUAT AREA DI BAWAH CURSOR
+    BENAR-BENAR TERINVERT
+  */
+  mix-blend-mode: difference;
+
+  color: #000;
+
+  pointer-events: none;
+
+  z-index: 99999;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  will-change:
+    transform,
+    width,
+    height;
+
+  /*
+    smooth ketika membesar
+  */
+  transition:
+    width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================
+   SAAT MOUSE MELEWATI TEXT
+========================================= */
+
+.custom-cursor.cursor-invert {
+  width: 110px;
+  height: 110px;
+}
+
+
+/* =========================================
+   ICON CURSOR
+========================================= */
+
+.custom-cursor span {
+  color: #ffffff;
+
+  font-size: 17px;
+
+  opacity: 0.95;
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.custom-cursor.cursor-invert span {
+  transform: rotate(45deg) scale(1.15);
+}
+
+
+/* =========================================
+   MATIKAN CAHAYA LAMA
+========================================= */
+
+.mouse-spotlight {
+  display: none !important;
+}
+
+
+/* =========================================
+   PASTIKAN BODY TIDAK MENGGANGGU
+========================================= */
+
+body {
+  isolation: isolate;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none;
+  }
+
+  .mouse-spotlight {
+    display: none !important;
+  }
+}/* =====================================================
+   PROJECT INTERACTION
+===================================================== */
+
+.project-card {
+  perspective: 1400px;
+}
+
+.project-visual {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visual-orb {
+  will-change: transform;
+}
+
+.visual-title {
+  will-change: transform;
+}
+
+.project-hover-label {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -35%);
+
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  padding: 18px 24px;
+
+  border: 1px solid rgba(255,255,255,0.7);
+
+  border-radius: 100px;
+
+  background: rgba(0,0,0,0.2);
+
+  backdrop-filter: blur(12px);
+
+  color: #fff;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.08em;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  white-space: nowrap;
+
+  z-index: 10;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-hover-label span:last-child {
+  font-size: 18px;
+}
+
+.project-card:hover .project-hover-label {
+  background: rgba(255,255,255,0.08);
+
+  border-color: #fff;
+}
+
+.project-description {
+  max-width: 500px;
+
+  margin-top: 15px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  color: rgba(255,255,255,0.55);
+}
+
+.project-tags {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 15px;
+}
+
+.project-tags span {
+  padding: 7px 10px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  border-radius: 100px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  color: rgba(255,255,255,0.65);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-card:hover .project-tags span {
+  border-color: rgba(255,255,255,0.6);
+
+  color: #fff;
+}
+
+
+/* =====================================================
+   CURSOR VIEW
+===================================================== */
+
+.custom-cursor strong {
+  position: absolute;
+
+  opacity: 0;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.08em;
+
+  font-weight: 400;
+
+  transform: scale(0.7);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.cursor-view strong {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.custom-cursor.cursor-view span {
+  opacity: 0;
+}
+
+
+/* =====================================================
+   PROJECT MODAL
+===================================================== */
+
+.project-modal-layer {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  color: #f2f2f2;
+}
+
+.project-modal-backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0,0,0,0.8);
+
+  backdrop-filter: blur(15px);
+
+  opacity: 0;
+}
+
+.project-modal {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1400px, 94vw);
+
+  height: min(90vh, 900px);
+
+  overflow-y: auto;
+
+  background: #0b0c10;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  padding: 30px;
+
+  opacity: 0;
+
+  transform-origin: center;
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 25px;
+  right: 25px;
+
+  z-index: 20;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 15px;
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  border-radius: 100px;
+
+  background: rgba(11,12,16,0.7);
+
+  color: #fff;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.modal-close span {
+  font-size: 18px;
+
+  line-height: 0.5;
+}
+
+.modal-close:hover {
+  background: #fff;
+
+  color: #0b0c10;
+}
+
+.modal-content {
+  min-height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.modal-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: rgba(255,255,255,0.55);
+}
+
+.modal-visual {
+  position: relative;
+
+  height: 48vh;
+
+  min-height: 350px;
+
+  margin-top: 20px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.modal-visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.15;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.5) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.5) 1px,
+      transparent 1px
+    );
+
+  background-size: 70px 70px;
+}
+
+.modal-visual-shape {
+  width: 22vw;
+  height: 22vw;
+
+  min-width: 220px;
+  min-height: 220px;
+
+  border-radius: 40% 60% 55% 45%;
+
+  background: #f2f2f2;
+
+  mix-blend-mode: difference;
+
+  animation: modalShape 7s ease-in-out infinite alternate;
+}
+
+@keyframes modalShape {
+  0% {
+    border-radius: 40% 60% 55% 45%;
+
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    border-radius: 60% 40% 45% 55%;
+
+    transform: rotate(12deg) scale(1.08);
+  }
+}
+
+.modal-visual > span {
+  position: absolute;
+
+  font-size: clamp(80px, 14vw, 200px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.09em;
+
+  color: #fff;
+
+  mix-blend-mode: difference;
+}
+
+.modal-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 60px;
+
+  padding: 55px 0;
+
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.modal-label {
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: rgba(255,255,255,0.5);
+
+  margin-bottom: 20px;
+}
+
+.modal-info h2 {
+  font-size: clamp(70px, 9vw, 130px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.08em;
+}
+
+.modal-description {
+  align-self: end;
+}
+
+.modal-description > p {
+  max-width: 500px;
+
+  font-size: 20px;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.03em;
+}
+
+.modal-stack {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 35px;
+}
+
+.modal-stack span {
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  border-radius: 100px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+}
+
+.modal-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-top: 20px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: rgba(255,255,255,0.45);
+}
+
+
+/* =====================================================
+   MOBILE PROJECT
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .project-hover-label {
+    display: none;
+  }
+
+  .project-description {
+    display: none;
+  }
+
+  .project-tags {
+    display: none;
+  }
+
+  .project-modal-layer {
+    padding: 10px;
+  }
+
+  .project-modal {
+    width: 100%;
+
+    height: 94vh;
+
+    padding: 20px;
+  }
+
+  .modal-close {
+    top: 15px;
+    right: 15px;
+  }
+
+  .modal-visual {
+    height: 40vh;
+
+    min-height: 300px;
+  }
+
+  .modal-visual-shape {
+    width: 55vw;
+    height: 55vw;
+  }
+
+  .modal-info {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+
+    padding: 40px 0;
+  }
+
+  .modal-info h2 {
+    font-size: 25vw;
+  }
+
+  .modal-description > p {
+    font-size: 17px;
+  }
+
+  .modal-footer {
+    gap: 20px;
+
+    flex-direction: column;
+  }
+}/* =====================================================
+   DARK MODE — HERO / LANDING ONLY
+   UI & LAYOUT TETAP
+===================================================== */
+
+.hero {
+  background: #111;
+  color: #f2f1ed;
+}
+
+.navbar {
+  color: #f2f1ed;
+}
+
+.navbar nav a::after {
+  background: #f2f1ed;
+}
+
+.menu-status span {
+  background: #f2f1ed;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(
+      rgba(242, 241, 237, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(242, 241, 237, 0.18) 1px,
+      transparent 1px
+    );
+}
+
+.hero-floating {
+  border-color: #f2f1ed;
+  background: #111;
+  color: #f2f1ed;
+}
+
+.status-dot {
+  background: #f2f1ed;
+}
+
+.hero-background-shape {
+  /* bentuk & animasi TETAP, cuma mode warnanya gelap */
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #0534f1,
+      transparent 50%
+    ),
+    #111;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    background: #111;
+    color: #f2f1ed;
+  }
+}

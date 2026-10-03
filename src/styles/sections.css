@@ -1,0 +1,23 @@
+/* =========================================
+   GLOBAL SECTIONS
+========================================= */
+
+.section {
+  padding: 140px 4vw;
+}
+
+.section-label {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  border-top: 1px solid #111;
+
+  padding-top: 12px;
+
+  margin-bottom: 100px;
+}

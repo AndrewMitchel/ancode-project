@@ -1,0 +1,200 @@
+/* =========================================
+   WORK
+========================================= */
+
+.work {
+  background: #111;
+
+  color: #f2f1ed;
+}
+
+.work .section-label {
+  border-color: #f2f1ed;
+}
+
+.projects {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 130px;
+}
+
+.project-card {
+  cursor: pointer;
+}
+
+.project-visual {
+  height: 72vh;
+
+  min-height: 500px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card:hover .project-visual {
+  transform: scale(0.985);
+}
+
+.project-one {
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      #f4a261 0,
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #2a2a2a,
+      #111
+    );
+}
+
+.project-two {
+  background:
+    radial-gradient(
+      circle at 25% 70%,
+      #d8f3dc 0,
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #292929,
+      #111
+    );
+}
+
+.project-three {
+  background:
+    radial-gradient(
+      circle at 75% 65%,
+      #bde0fe 0,
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #252525,
+      #111
+    );
+}
+
+.visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.15;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    );
+
+  background-size: 70px 70px;
+}
+
+.visual-orb {
+  width: 30vw;
+  height: 30vw;
+
+  min-width: 260px;
+  min-height: 260px;
+
+  border-radius: 50%;
+
+  background: #f2f1ed;
+
+  mix-blend-mode: difference;
+
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.8s ease;
+}
+
+.project-card:hover .visual-orb {
+  transform:
+    scale(1.25)
+    rotate(20deg);
+
+  border-radius: 30%;
+}
+
+.visual-title {
+  position: absolute;
+
+  font-size: clamp(80px, 15vw, 220px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.08em;
+
+  mix-blend-mode: difference;
+
+  color: #fff;
+}
+
+.visual-arrow {
+  position: absolute;
+
+  right: 30px;
+  top: 30px;
+
+  font-size: 35px;
+
+  transition:
+    transform 0.4s ease;
+}
+
+.project-card:hover .visual-arrow {
+  transform:
+    translate(8px, -8px);
+}
+
+.project-info {
+  padding-top: 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+}
+
+.project-info > div:first-child {
+  display: flex;
+
+  gap: 20px;
+
+  align-items: baseline;
+}
+
+.project-info h3 {
+  font-family: "Inter", sans-serif;
+
+  font-size: 28px;
+
+  letter-spacing: -0.05em;
+}
+
+.project-type {
+  text-align: right;
+}
