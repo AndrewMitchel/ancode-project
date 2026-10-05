@@ -130,75 +130,53 @@
     margin-top: 70px;
   }
 
-  /*
-     WORK / PROJECTS
-
-     Jangan kasih fixed height pada project visual.
-     Gambar project harus mengikuti aspect ratio aslinya
-     supaya seluruh isi project tetap terlihat di mobile.
-  */
+  /* =========================================
+     PROJECT / WORK
+     MOBILE RESPONSIVE
+  ========================================= */
 
   .project-visual {
-    width: 100%;
-    height: auto;
-    min-height: 0;
+    width: 94%;
+
+    /*
+      Jangan gunakan tinggi viewport
+      di mobile karena gambar project
+      harus menentukan tinggi container.
+    */
+    height: auto !important;
+
+    /*
+      Hapus minimum height yang sebelumnya
+      membuat ruang kosong besar di bawah gambar.
+    */
+    min-height: 0 !important;
+
+    border-radius: 24px;
   }
 
   .project-image {
     width: 100%;
-    height: auto;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    max-height: none !important;
+
     display: block;
+
+    object-fit: contain;
+
+    border-radius: 23px;
   }
 
-  .visual-arrow {
-    right: 14px;
-    top: 14px;
-    width: 34px;
-    height: 34px;
-    font-size: 16px;
+  .visual-orb {
+    width: 55vw;
+    height: 55vw;
   }
 
-  .project-hover-label {
-    display: none;
-  }
-
-  .project-info {
-    width: 100%;
-    padding-top: 16px;
-    gap: 14px;
-  }
-
-  .project-info > div:first-child {
-    width: 100%;
-    min-width: 0;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .project-info > div:first-child > div {
-    min-width: 0;
-    flex: 1;
-  }
-
-  .project-info h3 {
-    font-size: clamp(22px, 7vw, 30px);
-    line-height: 1;
-  }
-
-  .project-description {
-    width: 100%;
-    max-width: none;
-    font-size: 9px;
-    line-height: 1.6;
-  }
-
-  .project-tags {
-    max-width: 100%;
-  }
-
-  .project-type {
-    width: 100%;
-    text-align: left;
+  .visual-title {
+    font-size: 24vw;
   }
 
   .project-info {
@@ -286,4 +264,40 @@
 
     gap: 15px;
   }
+}
+
+
+/* =========================================
+   EXTRA SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .project-visual {
+    width: 96%;
+
+    /*
+      Tetap mengikuti tinggi gambar.
+      Tidak boleh ada tinggi minimum
+      yang membuat ruang kosong.
+    */
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    border-radius: 20px;
+  }
+
+  .project-image {
+    width: 100%;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    max-height: none !important;
+
+    border-radius: 19px;
+  }
+
 }
