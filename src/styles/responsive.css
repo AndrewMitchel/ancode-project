@@ -231,3 +231,456 @@
     gap: 15px;
   }
 }
+
+/* =========================================================
+   RESPONSIVE POLISH
+   Keeps the same visual hierarchy on tablet and mobile
+   while preventing clipping and horizontal overflow.
+========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .hero {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .hero-title {
+    font-size: clamp(76px, 13.5vw, 150px);
+  }
+
+  .hero-indent {
+    padding-left: 9vw;
+  }
+
+  .intro {
+    grid-template-columns: 1fr 2fr;
+    gap: 35px;
+  }
+
+  .services-heading h2,
+  .statement-word,
+  .contact-content h2 {
+    max-width: 100%;
+  }
+
+  .footer {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 90px 20px;
+  }
+
+  .section-label {
+    margin-bottom: 55px;
+    font-size: 9px;
+  }
+
+  .hero {
+    min-height: 100svh;
+    height: 100svh;
+    padding: 0 20px 24px;
+  }
+
+  .hero-content {
+    padding-top: 23vh;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    width: 100%;
+    font-size: clamp(48px, 15vw, 76px);
+    line-height: 0.82;
+    letter-spacing: -0.085em;
+  }
+
+  .hero-word-wrapper {
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .hero-word {
+    padding-right: 0.1em;
+  }
+
+  .hero-indent {
+    padding-left: 6vw;
+  }
+
+  .hero-description {
+    margin-top: 38px;
+    max-width: 190px;
+    font-size: 8px;
+    line-height: 1.55;
+  }
+
+  .hero-bottom {
+    width: 100%;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    font-size: 8px;
+  }
+
+  .hero-location {
+    min-width: 0;
+  }
+
+  .scroll-indicator {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .scroll-arrow {
+    font-size: 17px;
+  }
+
+  .intro {
+    display: block;
+    min-height: auto;
+  }
+
+  .intro-content > p:first-child {
+    font-size: clamp(40px, 10vw, 64px);
+  }
+
+  .intro-small {
+    margin-top: 55px;
+    max-width: 100%;
+    font-size: 10px;
+  }
+
+  .projects {
+    gap: 75px;
+  }
+
+  .project-visual {
+    width: 100%;
+  }
+
+  .project-info {
+    width: 100%;
+  }
+
+  .project-info > div:first-child {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .project-info h3 {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+
+  .project-type {
+    max-width: 100%;
+  }
+
+  .marquee {
+    padding: 28px 0;
+  }
+
+  .marquee-track {
+    font-size: clamp(60px, 18vw, 110px);
+  }
+
+  .services-heading {
+    margin-bottom: 65px;
+  }
+
+  .services-heading h2 {
+    font-size: clamp(64px, 19vw, 120px);
+  }
+
+  .services-heading h2 span {
+    padding-left: 7vw;
+  }
+
+  .service-item {
+    grid-template-columns: 38px minmax(0, 1fr) 30px;
+    min-height: 82px;
+  }
+
+  .service-item h3 {
+    font-size: clamp(22px, 6vw, 38px);
+    min-width: 0;
+  }
+
+  .service-arrow {
+    font-size: 20px;
+  }
+
+  .statement {
+    min-height: 80svh;
+    padding: 70px 20px;
+  }
+
+  .statement-word {
+    font-size: clamp(58px, 18vw, 115px);
+  }
+
+  .statement-word:nth-child(2) {
+    padding-left: 6vw;
+  }
+
+  .statement-word:nth-child(3) {
+    padding-left: 2vw;
+  }
+
+  .statement-word:nth-child(4) {
+    padding-left: 9vw;
+  }
+
+  .contact {
+    min-height: 80svh;
+    padding: 90px 20px;
+  }
+
+  .contact-content h2 {
+    font-size: clamp(58px, 19vw, 120px);
+  }
+
+  .contact-content h2 span {
+    -webkit-text-stroke: 1px #111;
+  }
+
+  .contact-small {
+    font-size: 9px;
+    margin-bottom: 45px;
+  }
+
+  .contact-button {
+    margin-top: 60px;
+    padding: 17px 23px;
+    gap: 20px;
+    font-size: 9px;
+  }
+
+  .footer {
+    padding: 50px 20px 22px;
+  }
+
+  .footer-top {
+    min-height: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 20px;
+  }
+
+  .footer-logo {
+    font-size: clamp(48px, 15vw, 90px);
+  }
+
+  .footer-bottom {
+    gap: 12px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 18px 20px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .menu-status {
+    font-size: 8px;
+  }
+
+  .hero {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-content {
+    padding-top: 22vh;
+  }
+
+  .hero-title {
+    font-size: clamp(46px, 14.5vw, 64px);
+  }
+
+  .hero-indent {
+    padding-left: 5vw;
+  }
+
+  .hero-description {
+    margin-top: 32px;
+    max-width: 175px;
+    font-size: 7.5px;
+  }
+
+  .hero-bottom {
+    font-size: 7px;
+    gap: 10px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .section {
+    padding: 75px 16px;
+  }
+
+  .section-label {
+    margin-bottom: 45px;
+    font-size: 8px;
+  }
+
+  .intro-content > p:first-child {
+    font-size: clamp(36px, 10.5vw, 52px);
+  }
+
+  .intro-small {
+    margin-top: 45px;
+    font-size: 9px;
+  }
+
+  .projects {
+    gap: 65px;
+  }
+
+  .project-visual {
+    border-radius: 18px;
+  }
+
+  .project-image {
+    border-radius: 17px;
+  }
+
+  .visual-arrow {
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .project-info h3 {
+    font-size: 23px;
+  }
+
+  .project-description {
+    font-size: 9px;
+  }
+
+  .project-tags span {
+    font-size: 7px;
+    padding: 5px 8px;
+  }
+
+  .services-heading {
+    margin-bottom: 55px;
+  }
+
+  .services-heading h2 {
+    font-size: clamp(58px, 18vw, 90px);
+  }
+
+  .service-item {
+    grid-template-columns: 30px minmax(0, 1fr) 24px;
+    min-height: 72px;
+  }
+
+  .service-item h3 {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+
+  .service-arrow {
+    font-size: 17px;
+  }
+
+  .statement {
+    padding: 60px 16px;
+  }
+
+  .statement-word {
+    font-size: clamp(52px, 17vw, 82px);
+  }
+
+  .contact {
+    padding: 75px 16px;
+  }
+
+  .contact-content h2 {
+    font-size: clamp(52px, 18vw, 88px);
+  }
+
+  .contact-button {
+    margin-top: 50px;
+    padding: 15px 20px;
+    gap: 16px;
+    font-size: 8px;
+  }
+
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-logo {
+    grid-column: auto;
+    font-size: clamp(46px, 15vw, 72px);
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+  }
+}
+
+/* Touch devices do not have hover, so keep interactive labels usable
+   without changing the desktop hover design. */
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover .project-visual {
+    transform: none;
+  }
+
+  .project-card:hover .project-image {
+    transform: none;
+  }
+
+  .project-hover-label {
+    display: none;
+  }
+
+  .service-item:hover {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .navbar nav a::after {
+    display: none;
+  }
+
+  .hero-orbit-3d canvas {
+    cursor: default !important;
+  }
+}

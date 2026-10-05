@@ -739,6 +739,40 @@ function HeroOrbit3D() {
 
 
     /* =====================================================
+       RESPONSIVE 3D LAYOUT
+
+       Desktop keeps the original composition.
+       Mobile/tablet scale and reposition the 3D system
+       so it stays visually consistent with the hero
+       instead of being cropped by the narrow viewport.
+    ===================================================== */
+
+    const updateResponsiveLayout = () => {
+      const width = container.clientWidth;
+
+      if (width <= 480) {
+        hero3D.position.x = 0.25;
+        hero3D.position.y = -1.45;
+        hero3D.scale.setScalar(0.58);
+      } else if (width <= 768) {
+        hero3D.position.x = 0.55;
+        hero3D.position.y = -1.25;
+        hero3D.scale.setScalar(0.68);
+      } else if (width <= 1024) {
+        hero3D.position.x = 1.8;
+        hero3D.position.y = -1.05;
+        hero3D.scale.setScalar(0.82);
+      } else {
+        hero3D.position.x = 3.25;
+        hero3D.position.y = -1.05;
+        hero3D.scale.setScalar(1);
+      }
+    };
+
+    updateResponsiveLayout();
+
+
+    /* =====================================================
        DRAG ROTATION
     ===================================================== */
 
@@ -884,6 +918,8 @@ function HeroOrbit3D() {
             2
           )
         );
+
+        updateResponsiveLayout();
       };
 
 
