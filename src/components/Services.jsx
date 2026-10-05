@@ -8,7 +8,6 @@ function Services({ services }) {
       <div className="section-label reveal">
 
         <span>
-          (03)
         </span>
 
         <span>

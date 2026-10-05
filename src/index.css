@@ -3,6 +3,7 @@
 @import "./styles/cursor.css";
 @import "./styles/navbar.css";
 @import "./styles/hero.css";
+@import "./styles/hero-orbit-3d.css";
 @import "./styles/sections.css";
 @import "./styles/intro.css";
 @import "./styles/work.css";
@@ -12,5 +13,5 @@
 @import "./styles/contact.css";
 @import "./styles/footer.css";
 @import "./styles/responsive.css";
-@import "./styles/theme.css";
 @import "./styles/modal.css";
+@import "./styles/theme.css";

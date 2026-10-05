@@ -5,7 +5,6 @@ function Intro() {
       <div className="section-label reveal">
 
         <span>
-          (01)
         </span>
 
         <span>

@@ -1,10 +1,10 @@
-/* =========================================
+/* =========================================================
    HERO
-========================================= */
+========================================================= */
 
 .hero {
-  min-height: 100vh;
-  height: auto;
+  height: 100vh;
+  min-height: 700px;
 
   position: relative;
 
@@ -17,29 +17,43 @@
   justify-content: space-between;
 }
 
+
+/* =========================================================
+   HERO BACKGROUND
+========================================================= */
+
 .hero-background {
   position: absolute;
+
   inset: 0;
 
   overflow: hidden;
 
   pointer-events: none;
+
+  z-index: 0;
 }
+
+
+/* =========================================================
+   HERO GRID
+========================================================= */
 
 .hero-grid {
   position: absolute;
+
   inset: -10%;
 
   opacity: 0.18;
 
   background-image:
     linear-gradient(
-      rgba(17, 17, 17, 0.25) 1px,
+      rgba(181, 232, 76, 0.12) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(17, 17, 17, 0.25) 1px,
+      rgba(181, 232, 76, 0.12) 1px,
       transparent 1px
     );
 
@@ -50,51 +64,100 @@
     rotateX(55deg)
     scale(1.5);
 
-  transform-origin: center bottom;
+  transform-origin:
+    center bottom;
+
+  pointer-events: none;
 }
+
+
+/* =========================================================
+   OLD HERO SHAPE
+========================================================= */
 
 .hero-background-shape {
+  display: none !important;
+}
+
+
+/* =========================================================
+   HERO 3D LAYER
+========================================================= */
+
+/*
+ * HeroOrbit3D.jsx membuat:
+ *
+ * - sphere
+ * - orbit
+ * - WEB
+ * - APP
+ * - CODE
+ * - UI/UX
+ * - DATABASE
+ *
+ * semuanya di dalam WebGL scene.
+ *
+ * Layer ini berada di belakang typography
+ * tetapi di depan background.
+ */
+
+.hero-orbit-3d {
   position: absolute;
 
-  width: 42vw;
-  height: 42vw;
+  inset: 0;
 
-  min-width: 400px;
-  min-height: 400px;
+  width: 100%;
+  height: 100%;
 
-  right: -10vw;
-  top: 18%;
+  z-index: 5;
 
-  border-radius: 50%;
+  overflow: hidden;
 
-  background:
-    radial-gradient(
-      circle at 30% 30%,
-      #547cff,
-      transparent 50%
-    ),
-    #111;
+  pointer-events: auto;
 
-  filter: blur(1px);
-
-  opacity: 0.9;
-
-  will-change: transform;
+  touch-action: none;
 }
+
+
+.hero-orbit-3d canvas {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  outline: none;
+
+  touch-action: none;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
 
 .hero-content {
   position: relative;
 
-  z-index: 5;
+  z-index: 50;
 
-  padding-top: 16vh;
+  padding-top: 22vh;
+
+  pointer-events: none;
 }
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
 
 .hero-eyebrow {
   display: flex;
+
   justify-content: space-between;
 
-  font-family: "DM Mono", monospace;
+  font-family:
+    "DM Mono",
+    monospace;
 
   font-size: 10px;
 
@@ -103,300 +166,485 @@
   max-width: 100%;
 }
 
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
 .hero-title {
-  font-size: clamp(90px, 13.5vw, 205px);
+  font-size:
+    clamp(
+      90px,
+      13.5vw,
+      205px
+    );
 
-  line-height: 0.77;
+  line-height:
+    0.77;
 
-  letter-spacing: -0.09em;
+  letter-spacing:
+    -0.09em;
 
-  font-weight: 800;
+  font-weight:
+    800;
 
-  position: relative;
+  position:
+    relative;
 
-  z-index: 5;
+  z-index:
+    50;
 
-  padding-top: 0.14em;
-  padding-bottom: 0.12em;
+  padding-top:
+    0.08em;
 
-  overflow: visible;
+  overflow:
+    visible;
 }
+
 
 .hero-word-wrapper {
-  overflow: visible;
+  overflow:
+    visible;
 
-  width: max-content;
+  width:
+    max-content;
 
-  padding-top: 0.08em;
-  padding-bottom: 0.05em;
+  padding-top:
+    0.05em;
 
-  margin-top: -0.03em;
+  margin-top:
+    -0.05em;
 
-  position: relative;
+  position:
+    relative;
 }
+
 
 .hero-word {
-  display: block;
+  display:
+    block;
 
-  will-change: transform;
+  will-change:
+    transform;
 
-  overflow: visible;
-
-  padding-top: 0.03em;
-  padding-right: 0.12em;
+  padding-right:
+    0.08em;
 }
+
 
 .hero-indent {
-  padding-left: 12vw;
+  padding-left:
+    12vw;
 }
+
 
 .hero-dot {
-  color: #0f03f1;
+  color:
+    var(--accent);
 }
 
-/* =========================================
+
+/* =========================================================
    HERO DESCRIPTION
-========================================= */
+========================================================= */
 
 .hero-description {
-  position: absolute;
+  position:
+    absolute;
 
-  right: 4vw;
-  bottom: -1vw;
+  right:
+    3vw;
 
-  z-index: 6;
+  bottom:
+    -4vw;
 
-  width: 220px;
+  /*
+   * Description berada di dalam hero-content
+   * yang memiliki z-index 50.
+   */
+  z-index:
+    80;
 
-  font-family: "DM Mono", monospace;
+  font-family:
+    "DM Mono",
+    monospace;
 
-  font-size: 11px;
+  font-size:
+    11px;
 
-  line-height: 1.6;
+  line-height:
+    1.5;
 
-  text-align: left;
+  color:
+    var(--text);
+
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  display:
+    block;
 }
 
-/* =========================================
-   HERO FLOATING BUTTONS
-========================================= */
+
+/* =========================================================
+   OLD FLOATING LABELS
+========================================================= */
+
+/*
+ * WEB / APP / CODE lama dinonaktifkan.
+ *
+ * Label sekarang dibuat oleh Three.js.
+ */
 
 .hero-floating {
-  position: absolute;
-
-  z-index: 7;
-
-  font-family: "DM Mono", monospace;
-
-  font-size: 9px;
-
-  border: 1px solid #111;
-
-  border-radius: 100px;
-
-  padding: 12px 17px;
-
-  background: #f2f1ed;
+  display:
+    none !important;
 }
 
-.floating-one {
-  top: 30%;
-  right: 18%;
-}
 
-.floating-two {
-  top: 52%;
-  right: 7%;
-}
-
-.floating-three {
-  top: 65%;
-  right: 24%;
-}
-
-/* =========================================
+/* =========================================================
    HERO BOTTOM
-========================================= */
+========================================================= */
 
 .hero-bottom {
-  position: relative;
+  position:
+    relative;
 
-  z-index: 10;
+  z-index:
+    80;
 
-  display: grid;
+  display:
+    grid;
 
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns:
+    1fr auto 1fr;
 
-  align-items: end;
+  align-items:
+    end;
 
-  font-family: "DM Mono", monospace;
+  font-family:
+    "DM Mono",
+    monospace;
 
-  font-size: 9px;
+  font-size:
+    9px;
 
-  margin-top: 30px;
+  pointer-events:
+    auto;
 }
+
 
 .hero-location {
-  display: flex;
-  align-items: center;
+  display:
+    flex;
 
-  gap: 8px;
+  align-items:
+    center;
+
+  gap:
+    8px;
 }
+
 
 .status-dot {
-  width: 7px;
-  height: 7px;
+  width:
+    7px;
 
-  background: #111;
+  height:
+    7px;
 
-  border-radius: 50%;
+  background:
+    var(--accent);
 
-  animation: pulse 1.8s infinite;
+  border-radius:
+    50%;
+
+  animation:
+    pulse
+    1.8s
+    infinite;
 }
+
+
+/* =========================================================
+   STATUS PULSE
+========================================================= */
 
 @keyframes pulse {
+
   0% {
-    opacity: 1;
-    transform: scale(1);
+    opacity:
+      1;
+
+    transform:
+      scale(1);
   }
 
   50% {
-    opacity: 0.3;
-    transform: scale(0.6);
+    opacity:
+      0.3;
+
+    transform:
+      scale(0.6);
   }
 
   100% {
-    opacity: 1;
-    transform: scale(1);
+    opacity:
+      1;
+
+    transform:
+      scale(1);
   }
+
 }
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
 
 .scroll-indicator {
-  display: flex;
-  flex-direction: column;
+  display:
+    flex;
 
-  align-items: center;
+  flex-direction:
+    column;
 
-  gap: 9px;
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  pointer-events:
+    auto;
 }
+
 
 .scroll-arrow {
-  font-size: 20px;
+  font-size:
+    20px;
 
-  animation: scrollBounce 1.5s infinite;
+  animation:
+    scrollBounce
+    1.5s
+    infinite;
 }
 
+
 @keyframes scrollBounce {
+
   0%,
   100% {
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 
   50% {
-    transform: translateY(8px);
+    transform:
+      translateY(8px);
   }
+
 }
+
+
+/* =========================================================
+   HERO SERVICES
+========================================================= */
 
 .hero-services {
-  text-align: right;
-
-  max-width: 220px;
-
-  justify-self: end;
-
-  line-height: 1.5;
+  text-align:
+    right;
 }
 
-/* =========================================
+
+/* =========================================================
+   HERO TRANSITION
+========================================================= */
+
+/*
+ * Gradient transisi harus berada
+ * DI BAWAH hero-content.
+ *
+ * Sebelumnya z-index: 70 sehingga
+ * menutupi hero-description.
+ */
+
+.hero::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  right:
+    0;
+
+  bottom:
+    -1px;
+
+  height:
+    180px;
+
+  pointer-events:
+    none;
+
+  z-index:
+    40;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(7, 28, 19, 0),
+      rgba(7, 28, 19, 0.35) 35%,
+      rgba(7, 28, 19, 0.75) 70%,
+      var(--bg) 100%
+    );
+}
+
+
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 768px) {
+
   .hero {
-    min-height: 100svh;
+    min-height:
+      100svh;
 
     padding:
-      0 5vw 25px;
+      0 20px 25px;
   }
+
 
   .hero-content {
-    padding-top: 15vh;
+    padding-top:
+      25vh;
+
+    z-index:
+      50;
   }
+
+
+  .hero-eyebrow {
+    font-size:
+      8px;
+
+    margin-bottom:
+      35px;
+  }
+
 
   .hero-title {
-    font-size: clamp(64px, 18vw, 120px);
+    font-size:
+      20vw;
 
-    line-height: 0.8;
+    line-height:
+      0.8;
 
-    padding-top: 0.16em;
-    padding-bottom: 0.1em;
+    padding-left:
+      2px;
   }
+
 
   .hero-word-wrapper {
-    padding-top: 0.1em;
-    padding-bottom: 0.06em;
+    padding-top:
+      0.06em;
+
+    margin-top:
+      -0.06em;
   }
+
 
   .hero-word {
-    padding-right: 0.08em;
+    padding-right:
+      0.12em;
   }
+
 
   .hero-indent {
-    padding-left: 8vw;
+    padding-left:
+      7vw;
   }
 
-  .hero-background-shape {
-    width: 75vw;
-    height: 75vw;
-
-    min-width: 0;
-    min-height: 0;
-
-    right: -20vw;
-    top: 25%;
-  }
 
   .hero-description {
-    right: 5vw;
-    bottom: 4vw;
+    position:
+      relative;
 
-    width: 180px;
+    right:
+      auto;
 
-    font-size: 9px;
+    bottom:
+      auto;
 
-    line-height: 1.5;
+    margin-top:
+      50px;
+
+    font-size:
+      9px;
+
+    z-index:
+      80;
+
+    color:
+      var(--text);
+
+    opacity:
+      1;
+
+    visibility:
+      visible;
+
+    display:
+      block;
   }
 
-  .hero-floating {
-    font-size: 8px;
-
-    padding: 9px 13px;
-  }
-
-  .floating-one {
-    top: 28%;
-    right: 12%;
-  }
-
-  .floating-two {
-    top: 48%;
-    right: 5%;
-  }
-
-  .floating-three {
-    top: 60%;
-    right: 18%;
-  }
 
   .hero-bottom {
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns:
+      1fr auto;
 
-    font-size: 8px;
-
-    margin-top: 20px;
+    gap:
+      20px;
   }
+
 
   .hero-services {
-    max-width: 150px;
+    display:
+      none;
   }
+
+
+  .hero-orbit-3d {
+    z-index:
+      5;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .status-dot {
+    animation:
+      none;
+  }
+
+  .scroll-arrow {
+    animation:
+      none;
+  }
+
 }

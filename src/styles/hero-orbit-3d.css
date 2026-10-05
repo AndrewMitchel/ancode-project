@@ -1,0 +1,25 @@
+.hero-orbit-3d {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 4;
+
+  overflow: hidden;
+
+  pointer-events: auto;
+}
+
+.hero-orbit-3d canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .hero-orbit-3d {
+    inset: 0;
+  }
+}

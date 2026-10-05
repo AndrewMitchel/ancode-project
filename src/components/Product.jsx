@@ -8,7 +8,6 @@ function Product({ projects, onProjectClick }) {
       <div className="section-label reveal">
 
         <span>
-          (02)
         </span>
 
         <span>
@@ -31,6 +30,13 @@ function Product({ projects, onProjectClick }) {
             <div
               className={`project-visual ${project.className}`}
             >
+
+              {/* PROJECT IMAGE */}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="project-image"
+              />
 
               <div className="visual-grid"></div>
 

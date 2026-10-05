@@ -1,10 +1,9 @@
 /* =========================================
-   WORK
+   WORK / SELECTED PRODUCT
 ========================================= */
 
 .work {
   background: #111;
-
   color: #f2f1ed;
 }
 
@@ -14,38 +13,59 @@
 
 .projects {
   display: flex;
-
   flex-direction: column;
-
   gap: 130px;
 }
+
+/* =========================================
+   PROJECT CARD
+========================================= */
 
 .project-card {
   cursor: pointer;
 }
 
-.project-visual {
-  height: 72vh;
+/* =========================================
+   PROJECT VISUAL
+========================================= */
 
-  min-height: 500px;
+.project-visual {
+  width: min(82%, 1200px);
+  margin: 0 auto;
 
   position: relative;
 
   overflow: hidden;
 
-  display: flex;
+  display: block;
 
-  align-items: center;
+  border-radius: 30px;
 
-  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: #171717;
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.28);
 
   transition:
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.5s ease;
 }
 
 .project-card:hover .project-visual {
   transform: scale(0.985);
+
+  border-color: rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.4);
 }
+
+/* =========================================
+   PROJECT BACKGROUNDS
+========================================= */
 
 .project-one {
   background:
@@ -89,85 +109,232 @@
     );
 }
 
+/* =========================================
+   PROJECT IMAGE
+   NGIKUTIN UKURAN ASLI FOTO
+========================================= */
+
+.project-image {
+  position: relative;
+
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 29px;
+
+  z-index: 1;
+
+  transform: scale(1);
+
+  filter: saturate(0.95);
+
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.025);
+
+  filter: saturate(1);
+}
+
+/* =========================================
+   VISUAL GRID
+========================================= */
+
 .visual-grid {
   position: absolute;
 
   inset: 0;
 
-  opacity: 0.15;
+  opacity: 0.05;
 
   background-image:
     linear-gradient(
-      rgba(255, 255, 255, 0.5) 1px,
+      rgba(255, 255, 255, 0.35) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.5) 1px,
+      rgba(255, 255, 255, 0.35) 1px,
       transparent 1px
     );
 
   background-size: 70px 70px;
-}
 
-.visual-orb {
-  width: 30vw;
-  height: 30vw;
+  z-index: 3;
 
-  min-width: 260px;
-  min-height: 260px;
+  pointer-events: none;
 
-  border-radius: 50%;
-
-  background: #f2f1ed;
-
-  mix-blend-mode: difference;
+  mix-blend-mode: overlay;
 
   transition:
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.8s ease;
+    opacity 0.5s ease;
 }
 
-.project-card:hover .visual-orb {
-  transform:
-    scale(1.25)
-    rotate(20deg);
-
-  border-radius: 30%;
+.project-card:hover .visual-grid {
+  opacity: 0.1;
 }
+
+/* =========================================
+   ORB
+   DISEMBUNYIKAN
+========================================= */
+
+.visual-orb {
+  display: none;
+}
+
+/* =========================================
+   VISUAL TITLE
+   BIAN / DANCOK / MULL
+   DIHILANGKAN
+========================================= */
 
 .visual-title {
-  position: absolute;
-
-  font-size: clamp(80px, 15vw, 220px);
-
-  font-weight: 800;
-
-  letter-spacing: -0.08em;
-
-  mix-blend-mode: difference;
-
-  color: #fff;
+  display: none;
 }
+
+/* =========================================
+   VISUAL ARROW
+========================================= */
 
 .visual-arrow {
   position: absolute;
 
-  right: 30px;
-  top: 30px;
+  right: 24px;
+  top: 24px;
 
-  font-size: 35px;
+  z-index: 8;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  backdrop-filter: blur(10px);
+
+  font-size: 20px;
+
+  color: #fff;
 
   transition:
-    transform 0.4s ease;
+    transform 0.4s ease,
+    background 0.4s ease,
+    border-color 0.4s ease;
 }
 
 .project-card:hover .visual-arrow {
   transform:
-    translate(8px, -8px);
+    translate(6px, -6px);
+
+  background: rgba(255, 255, 255, 0.15);
+
+  border-color: #fff;
 }
 
+/* =========================================
+   EXPLORE PROJECT
+   LEBIH JELAS
+========================================= */
+
+.project-hover-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    translateY(14px)
+    scale(0.92);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  padding: 16px 26px;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 100px;
+
+  background: #111;
+  color: #fff;
+
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+
+  z-index: 20;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.project-hover-label span {
+  color: #fff;
+}
+
+.project-hover-label span:last-child {
+  font-size: 17px;
+  line-height: 1;
+  color: #fff;
+}
+
+.project-card:hover .project-hover-label {
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    translateY(0)
+    scale(1);
+
+  background: #111;
+  color: #fff;
+
+  border-color: #fff;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   PROJECT INFO
+========================================= */
+
 .project-info {
+  width: min(82%, 1200px);
+
+  margin: 0 auto;
+
   padding-top: 18px;
 
   display: flex;
@@ -187,14 +354,291 @@
   align-items: baseline;
 }
 
+.project-info > div:first-child > span {
+  color: rgba(255, 255, 255, 0.45);
+}
+
 .project-info h3 {
   font-family: "Inter", sans-serif;
 
   font-size: 28px;
 
   letter-spacing: -0.05em;
+
+  font-weight: 500;
+}
+
+.project-description {
+  max-width: 500px;
+
+  margin-top: 15px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.project-tags {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 15px;
+}
+
+.project-tags span {
+  padding: 7px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 100px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-card:hover .project-tags span {
+  border-color: rgba(255, 255, 255, 0.6);
+
+  color: #fff;
 }
 
 .project-type {
   text-align: right;
+
+  font-family: "DM Mono", monospace;
+}
+
+/* =========================================
+   CURSOR VIEW
+========================================= */
+
+.custom-cursor strong {
+  position: absolute;
+
+  opacity: 0;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.08em;
+
+  font-weight: 400;
+
+  transform: scale(0.7);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.custom-cursor.cursor-view strong {
+  opacity: 0;
+
+  transform: scale(0,7);
+}
+
+.custom-cursor.cursor-view span {
+  opacity: 1;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1024px) {
+  .projects {
+    gap: 110px;
+  }
+
+  .project-visual {
+    width: 88%;
+
+    border-radius: 26px;
+  }
+
+  .project-image {
+    border-radius: 25px;
+  }
+
+  .project-info {
+    width: 88%;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects {
+    gap: 100px;
+  }
+
+  .project-visual {
+    width: 94%;
+
+    border-radius: 24px;
+  }
+
+  .project-image {
+    width: 100%;
+    height: auto;
+
+    border-radius: 23px;
+  }
+
+  .visual-arrow {
+    right: 16px;
+    top: 16px;
+
+    width: 36px;
+    height: 36px;
+
+    font-size: 17px;
+  }
+
+  .project-hover-label {
+    padding: 11px 16px;
+
+    gap: 9px;
+
+    font-size: 8px;
+  }
+
+  .project-hover-label span:last-child {
+    font-size: 12px;
+  }
+
+  .project-info {
+    width: 94%;
+
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .project-info h3 {
+    font-size: 28px;
+  }
+
+  .project-description {
+    max-width: 100%;
+  }
+
+  .project-type {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects {
+    gap: 80px;
+  }
+
+  .project-visual {
+    width: 96%;
+
+    border-radius: 20px;
+  }
+
+  .project-image {
+    border-radius: 19px;
+  }
+
+  .visual-arrow {
+    right: 12px;
+    top: 12px;
+
+    width: 32px;
+    height: 32px;
+
+    font-size: 15px;
+  }
+
+  .project-hover-label {
+    padding: 10px 14px;
+
+    font-size: 7px;
+  }
+
+  .project-info {
+    width: 96%;
+  }
+
+  .project-info h3 {
+    font-size: 25px;
+  }
+
+  .project-description {
+    font-size: 10px;
+  }
+
+  .project-tags span {
+    font-size: 7px;
+
+    padding: 5px 8px;
+  }
+}/* =========================================
+   FORCE EXPLORE PROJECT BUTTON
+   ========================================= */
+
+.project-hover-label {
+  background: #111 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+
+  padding: 18px 30px !important;
+  border-radius: 999px !important;
+
+  font-family: "DM Mono", monospace !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.45),
+    0 5px 15px rgba(0, 0, 0, 0.3) !important;
+
+  z-index: 999 !important;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease !important;
+}
+
+.project-hover-label span {
+  color: #fff !important;
+}
+
+.project-hover-label span:last-child {
+  color: #fff !important;
+  font-size: 18px !important;
+}
+
+.project-card:hover .project-hover-label {
+  background: #111 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+
+  opacity: 1 !important;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.3) !important;
 }

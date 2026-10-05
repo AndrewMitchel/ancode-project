@@ -1,0 +1,775 @@
+/* =========================================
+   PROJECT DETAIL PAGE
+========================================= */
+
+.project-detail {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.project-detail-header {
+  position: relative;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 28px 4vw;
+
+  border-bottom: 1px solid var(--line-soft);
+
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+
+.project-detail-logo {
+  color: var(--text);
+  text-decoration: none;
+
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+
+  letter-spacing: -0.06em;
+
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.project-detail-logo:hover {
+  color: var(--accent);
+}
+
+.project-detail-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--text);
+  text-decoration: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.project-detail-back:hover {
+  opacity: 0.55;
+  transform: translateX(4px);
+}
+
+.project-detail-back span {
+  color: var(--accent);
+  font-size: 15px;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.project-detail-hero {
+  padding: 70px 4vw 120px;
+
+  display: grid;
+  grid-template-columns:
+    1fr 2fr 1fr;
+
+  gap: 40px;
+}
+
+.project-detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+
+  color: var(--text-muted);
+}
+
+.project-detail-meta span:first-child {
+  color: var(--accent);
+}
+
+.project-detail-title p {
+  margin: 0 0 25px;
+
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+
+  color: var(--text-muted);
+}
+
+.project-detail-title h1 {
+  margin: 0;
+
+  font-size: clamp(
+    70px,
+    10vw,
+    170px
+  );
+
+  line-height: 0.82;
+
+  letter-spacing: -0.08em;
+
+  font-weight: 700;
+
+  color: var(--text);
+
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.project-detail-intro {
+  align-self: end;
+}
+
+.project-detail-intro p {
+  max-width: 380px;
+
+  margin: 0;
+
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+
+  line-height: 1.8;
+
+  color: var(--text-soft);
+}
+
+
+/* =========================================
+   FEATURE IMAGE
+========================================= */
+
+.project-detail-feature {
+  position: relative;
+
+  width: 92%;
+
+  margin: 0 auto 150px;
+
+  overflow: hidden;
+
+  border-radius: 30px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--line-soft);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.28);
+}
+
+.project-detail-feature::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(181, 232, 76, 0.06),
+      transparent 35%,
+      rgba(232, 111, 183, 0.04)
+    );
+}
+
+.project-detail-feature img {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  transition:
+    transform 1s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-detail-feature:hover img {
+  transform: scale(1.015);
+}
+
+
+/* =========================================
+   INFORMATION
+========================================= */
+
+.project-detail-info {
+  display: grid;
+
+  grid-template-columns:
+    1fr 2fr;
+
+  gap: 50px;
+
+  padding: 100px 4vw;
+
+  border-top: 1px solid var(--line-soft);
+
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.detail-info-label {
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: var(--text-muted);
+}
+
+.detail-info-content > p {
+  max-width: 850px;
+
+  margin: 0;
+
+  font-size: clamp(
+    28px,
+    3.5vw,
+    55px
+  );
+
+  line-height: 1.05;
+
+  letter-spacing: -0.045em;
+
+  color: var(--text);
+}
+
+.detail-info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 30px;
+
+  margin-top: 100px;
+
+  padding-top: 25px;
+
+  border-top: 1px solid var(--line-soft);
+}
+
+.detail-info-grid div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.detail-info-grid span {
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  color: var(--text-muted);
+}
+
+.detail-info-grid strong {
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  color: var(--text);
+}
+
+
+/* =========================================
+   GALLERY
+========================================= */
+
+.project-gallery {
+  padding: 150px 4vw;
+}
+
+.project-gallery-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  margin-bottom: 50px;
+
+  border-bottom: 1px solid var(--line-soft);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: var(--text-muted);
+}
+
+.project-gallery-heading span:last-child {
+  color: var(--accent);
+}
+
+.project-gallery-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 30px;
+}
+
+.project-gallery-item {
+  position: relative;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--line-soft);
+}
+
+.project-gallery-item-large {
+  grid-column: 1 / -1;
+}
+
+.project-gallery-item img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.8s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-gallery-item:hover img {
+  transform: scale(1.025);
+}
+
+.project-gallery-item figcaption {
+  position: absolute;
+
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 12px 15px;
+
+  border-radius: 100px;
+
+  background: rgba(4, 19, 12, 0.78);
+
+  backdrop-filter: blur(12px);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  color: var(--text-soft);
+
+  opacity: 0;
+
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.project-gallery-item figcaption span:first-child {
+  color: var(--accent);
+}
+
+.project-gallery-item:hover figcaption {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   TECHNOLOGY
+========================================= */
+
+.project-detail-stack {
+  padding: 100px 4vw;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 2fr;
+
+  gap: 50px;
+
+  border-top: 1px solid var(--line-soft);
+}
+
+.detail-stack-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.detail-stack-list span {
+  padding: 12px 18px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 100px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: var(--text);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.detail-stack-list span:hover {
+  background: var(--accent);
+
+  border-color: var(--accent);
+
+  color: var(--bg);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.project-detail-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 35px 4vw;
+
+  border-top: 1px solid var(--line-soft);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  color: var(--text-muted);
+}
+
+.project-detail-footer a {
+  color: var(--text);
+
+  text-decoration: none;
+
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.project-detail-footer a:hover {
+  color: var(--accent);
+}
+
+
+/* =========================================
+   404
+========================================= */
+
+.project-detail-not-found {
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--bg);
+
+  color: var(--text);
+}
+
+.project-detail-not-found > div {
+  text-align: center;
+}
+
+.project-detail-not-found span {
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  color: var(--accent);
+}
+
+.project-detail-not-found h1 {
+  margin: 25px 0 40px;
+
+  font-size: clamp(
+    40px,
+    8vw,
+    100px
+  );
+
+  letter-spacing: -0.07em;
+}
+
+.project-detail-not-found a {
+  color: var(--text);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  transition: color 0.3s ease;
+}
+
+.project-detail-not-found a:hover {
+  color: var(--accent);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .project-detail-header {
+    padding: 22px 5vw;
+
+    font-size: 9px;
+  }
+
+  .project-detail-logo {
+    font-size: 20px;
+  }
+
+
+  /* HERO */
+
+  .project-detail-hero {
+    padding: 60px 5vw 80px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 45px;
+  }
+
+  .project-detail-meta {
+    flex-direction: row;
+
+    justify-content: space-between;
+  }
+
+  .project-detail-title p {
+    margin-bottom: 18px;
+  }
+
+  .project-detail-title h1 {
+    font-size: clamp(
+      58px,
+      20vw,
+      110px
+    );
+
+    line-height: 0.82;
+  }
+
+  .project-detail-intro {
+    align-self: auto;
+  }
+
+  .project-detail-intro p {
+    max-width: 100%;
+
+    font-size: 10px;
+  }
+
+
+  /* FEATURE */
+
+  .project-detail-feature {
+    width: 94%;
+
+    margin-bottom: 80px;
+
+    border-radius: 20px;
+  }
+
+
+  /* INFO */
+
+  .project-detail-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 35px;
+
+    padding: 70px 5vw;
+  }
+
+  .detail-info-content > p {
+    font-size: 28px;
+  }
+
+  .detail-info-grid {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+
+    margin-top: 60px;
+  }
+
+
+  /* GALLERY */
+
+  .project-gallery {
+    padding: 90px 5vw;
+  }
+
+  .project-gallery-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .project-gallery-item-large {
+    grid-column: auto;
+  }
+
+  .project-gallery-item {
+    border-radius: 15px;
+  }
+
+  .project-gallery-item figcaption {
+    opacity: 1;
+
+    transform: none;
+
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+
+  /* TECHNOLOGY */
+
+  .project-detail-stack {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+    padding: 70px 5vw;
+  }
+
+
+  /* FOOTER */
+
+  .project-detail-footer {
+    padding: 25px 5vw;
+
+    gap: 20px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .project-detail-header {
+    padding: 20px 5vw;
+  }
+
+  .project-detail-back span {
+    font-size: 13px;
+  }
+
+  .project-detail-hero {
+    padding-top: 45px;
+
+    gap: 35px;
+  }
+
+  .project-detail-title h1 {
+    font-size: 20vw;
+
+    line-height: 0.84;
+  }
+
+  .project-detail-feature {
+    width: 94%;
+
+    border-radius: 16px;
+  }
+
+  .project-gallery {
+    padding-top: 70px;
+
+    padding-bottom: 70px;
+  }
+
+  .project-gallery-heading {
+    margin-bottom: 30px;
+  }
+
+  .detail-stack-list {
+    gap: 8px;
+  }
+
+  .detail-stack-list span {
+    padding: 10px 14px;
+  }
+
+  .project-detail-footer {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+}
