@@ -38,8 +38,10 @@ function Contact() {
         </h2>
 
         <a
-          href="mailto:hello@ancode.dev"
+          href="https://wa.me/6281459107638?text=Halo%2C%20saya%20tertarik%20untuk%20memulai%20sebuah%20project%20dengan%20Anda"
           className="contact-button"
+          target="_blank"
+          rel="noopener noreferrer"
         >
 
           START A PROJECT
