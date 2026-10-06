@@ -1,4 +1,9 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
+
 import {
   Routes,
   Route,
@@ -13,7 +18,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./index.css";
 
-import { projects, services } from "./data/data";
+import {
+  projects,
+  services,
+} from "./data/data";
 
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -32,18 +40,458 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 /* =====================================================
+   SCROLL MANAGEMENT
+===================================================== */
+
+function ScrollToTop() {
+  const {
+    pathname,
+    search,
+    hash,
+  } = useLocation();
+
+  const previousPathRef =
+    useRef(pathname);
+
+
+  /*
+    Matikan scroll restoration bawaan browser.
+  */
+
+  useEffect(() => {
+
+    if (
+      "scrollRestoration" in
+      window.history
+    ) {
+      window.history.scrollRestoration =
+        "manual";
+    }
+
+  }, []);
+
+
+  /*
+    Handle scroll setiap kali route berubah.
+  */
+
+  useEffect(() => {
+
+    const previousPath =
+      previousPathRef.current;
+
+
+    const goingToProject =
+      pathname.startsWith(
+        "/project/"
+      );
+
+
+    const comingFromProject =
+      previousPath.startsWith(
+        "/project/"
+      );
+
+
+    /* =========================================
+       LANDING -> PROJECT
+       =========================================
+
+       Semua project harus selalu mulai
+       dari posisi paling atas.
+    */
+
+    if (
+      goingToProject &&
+      !comingFromProject
+    ) {
+
+      const forceProjectTop = () => {
+
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+
+        document.documentElement.scrollTop =
+          0;
+
+        document.body.scrollTop =
+          0;
+
+      };
+
+
+      /*
+        Reset langsung.
+      */
+
+      forceProjectTop();
+
+
+      /*
+        Reset setelah React selesai render.
+      */
+
+      requestAnimationFrame(() => {
+
+        forceProjectTop();
+
+
+        requestAnimationFrame(() => {
+
+          forceProjectTop();
+
+        });
+
+      });
+
+
+      /*
+        Backup reset setelah layout
+        dan image mulai dihitung browser.
+      */
+
+      const timer1 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 50);
+
+
+      const timer2 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 150);
+
+
+      const timer3 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 300);
+
+
+      const timer4 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 600);
+
+
+      const timer5 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 1000);
+
+
+      /*
+        Tambahan:
+        Kalau browser selesai loading image,
+        paksa kembali ke atas.
+      */
+
+      const handleLoad = () => {
+
+        forceProjectTop();
+
+      };
+
+
+      window.addEventListener(
+        "load",
+        handleLoad
+      );
+
+
+      return () => {
+
+        window.clearTimeout(
+          timer1
+        );
+
+        window.clearTimeout(
+          timer2
+        );
+
+        window.clearTimeout(
+          timer3
+        );
+
+        window.clearTimeout(
+          timer4
+        );
+
+        window.clearTimeout(
+          timer5
+        );
+
+        window.removeEventListener(
+          "load",
+          handleLoad
+        );
+
+      };
+
+    }
+
+
+    /* =========================================
+       PROJECT -> PROJECT
+       =========================================
+
+       Kalau pindah langsung dari satu project
+       ke project lain, project baru juga mulai
+       dari atas.
+    */
+
+    if (
+      goingToProject &&
+      comingFromProject
+    ) {
+
+      const forceProjectTop = () => {
+
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+
+        document.documentElement.scrollTop =
+          0;
+
+        document.body.scrollTop =
+          0;
+
+      };
+
+
+      forceProjectTop();
+
+
+      requestAnimationFrame(() => {
+
+        forceProjectTop();
+
+
+        requestAnimationFrame(() => {
+
+          forceProjectTop();
+
+        });
+
+      });
+
+
+      const timer1 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 100);
+
+
+      const timer2 =
+        window.setTimeout(() => {
+          forceProjectTop();
+        }, 300);
+
+
+      return () => {
+
+        window.clearTimeout(
+          timer1
+        );
+
+        window.clearTimeout(
+          timer2
+        );
+
+      };
+
+    }
+
+
+    /* =========================================
+       PROJECT -> LANDING
+       =========================================
+
+       Kembalikan posisi terakhir Landing Page.
+    */
+
+    if (
+      pathname === "/" &&
+      comingFromProject
+    ) {
+
+      const savedScroll =
+        sessionStorage.getItem(
+          "ancode-landing-scroll"
+        );
+
+
+      if (
+        savedScroll !== null
+      ) {
+
+        const parsedScroll =
+          Number(savedScroll);
+
+
+        const scrollY =
+          Number.isFinite(
+            parsedScroll
+          )
+            ? Math.max(
+                0,
+                parsedScroll
+              )
+            : 0;
+
+
+        /*
+          Restore setelah Landing
+          selesai dirender.
+        */
+
+        const restoreLandingScroll =
+          () => {
+
+            window.scrollTo({
+              top: scrollY,
+              left: 0,
+              behavior: "auto",
+            });
+
+          };
+
+
+        requestAnimationFrame(() => {
+
+          restoreLandingScroll();
+
+
+          requestAnimationFrame(() => {
+
+            restoreLandingScroll();
+
+
+            requestAnimationFrame(() => {
+
+              restoreLandingScroll();
+
+            });
+
+          });
+
+        });
+
+
+        /*
+          Backup supaya GSAP / layout
+          tidak mengembalikan posisi
+          ke tempat lain.
+        */
+
+        const timer1 =
+          window.setTimeout(() => {
+            restoreLandingScroll();
+          }, 100);
+
+
+        const timer2 =
+          window.setTimeout(() => {
+            restoreLandingScroll();
+          }, 300);
+
+
+        const timer3 =
+          window.setTimeout(() => {
+            restoreLandingScroll();
+          }, 600);
+
+
+        return () => {
+
+          window.clearTimeout(
+            timer1
+          );
+
+          window.clearTimeout(
+            timer2
+          );
+
+          window.clearTimeout(
+            timer3
+          );
+
+        };
+
+      }
+
+    }
+
+
+    /* =========================================
+       LOADING
+       ========================================= */
+
+    if (
+      pathname === "/loading"
+    ) {
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+
+      document.documentElement.scrollTop =
+        0;
+
+      document.body.scrollTop =
+        0;
+
+    }
+
+
+    /*
+      Simpan route sekarang
+      untuk render berikutnya.
+    */
+
+    previousPathRef.current =
+      pathname;
+
+  }, [
+    pathname,
+    search,
+    hash,
+  ]);
+
+
+  return null;
+}
+
+
+/* =====================================================
    LANDING PAGE
 ===================================================== */
 
 function LandingRoute() {
 
-  const navigate = useNavigate();
+  const navigate =
+    useNavigate();
 
 
-  const appRef = useRef(null);
-  const cursorRef = useRef(null);
-  const spotlightRef = useRef(null);
-  const heroRef = useRef(null);
+  const appRef =
+    useRef(null);
+
+  const cursorRef =
+    useRef(null);
+
+  const spotlightRef =
+    useRef(null);
+
+  const heroRef =
+    useRef(null);
 
 
   useLayoutEffect(() => {
@@ -61,7 +509,10 @@ function LandingRoute() {
           heroRef.current;
 
 
-        if (!cursor || !hero) {
+        if (
+          !cursor ||
+          !hero
+        ) {
           return;
         }
 
@@ -354,7 +805,9 @@ function LandingRoute() {
         }
 
 
-        if (heroWords.length) {
+        if (
+          heroWords.length
+        ) {
 
           heroTimeline.from(
             heroWords,
@@ -371,7 +824,9 @@ function LandingRoute() {
         }
 
 
-        if (heroDescription) {
+        if (
+          heroDescription
+        ) {
 
           heroTimeline.from(
             heroDescription,
@@ -657,8 +1112,12 @@ function LandingRoute() {
               gsap.to(
                 visual,
                 {
-                  rotateY: x * 10,
-                  rotateX: y * -10,
+                  rotateY:
+                    x * 10,
+
+                  rotateX:
+                    y * -10,
+
                   duration: 0.5,
                   ease: "power3.out",
                 }
@@ -806,12 +1265,23 @@ function LandingRoute() {
 
   /* =========================================
      OPEN PROJECT
-     
-     REACT ROUTER:
-     TIDAK ADA LOADING DI SINI.
   ========================================= */
 
   const openProject = (project) => {
+
+    /*
+      Simpan posisi Landing terakhir.
+    */
+
+    sessionStorage.setItem(
+      "ancode-landing-scroll",
+      String(window.scrollY)
+    );
+
+
+    /*
+      Masuk ke project.
+    */
 
     navigate(
       `/project/${project.slug}`
@@ -928,13 +1398,6 @@ function AppRouter() {
     /*
       Cuma cek sekali saat aplikasi
       pertama kali dibuka.
-
-      Jadi perpindahan:
-
-      landing -> detail
-      detail -> landing
-
-      TIDAK akan memicu loading.
     */
 
     if (
@@ -962,11 +1425,7 @@ function AppRouter() {
 
 
     /*
-      Browser Navigation API:
-
-      navigate = buka halaman
-      reload   = refresh browser
-      back_forward = tombol browser
+      Browser Navigation API
     */
 
     const navigationEntry =
@@ -1009,20 +1468,6 @@ function AppRouter() {
         location.hash;
 
 
-      /*
-        Simpan URL yang sedang dibuka.
-
-        Ini yang membuat:
-
-        refresh /
-        -> loading
-        -> /
-
-        refresh /project/coffee-spot
-        -> loading
-        -> /project/coffee-spot
-      */
-
       sessionStorage.setItem(
         "ancode-loading-return",
         returnPath
@@ -1047,59 +1492,66 @@ function AppRouter() {
 
 
   return (
-    <Routes>
+    <>
 
-      {/* =========================================
-          LOADING
-      ========================================= */}
-
-      <Route
-        path="/loading"
-        element={
-          <LoadingPage />
-        }
-      />
+      <ScrollToTop />
 
 
-      {/* =========================================
-          LANDING
-      ========================================= */}
+      <Routes>
 
-      <Route
-        path="/"
-        element={
-          <LandingRoute />
-        }
-      />
+        {/* =========================================
+            LOADING
+        ========================================= */}
 
-
-      {/* =========================================
-          PROJECT DETAIL
-      ========================================= */}
-
-      <Route
-        path="/project/:slug"
-        element={
-          <ProjectRoute />
-        }
-      />
+        <Route
+          path="/loading"
+          element={
+            <LoadingPage />
+          }
+        />
 
 
-      {/* =========================================
-          FALLBACK
-      ========================================= */}
+        {/* =========================================
+            LANDING
+        ========================================= */}
 
-      <Route
-        path="*"
-        element={
-          <Navigate
-            to="/"
-            replace
-          />
-        }
-      />
+        <Route
+          path="/"
+          element={
+            <LandingRoute />
+          }
+        />
 
-    </Routes>
+
+        {/* =========================================
+            PROJECT DETAIL
+        ========================================= */}
+
+        <Route
+          path="/project/:slug"
+          element={
+            <ProjectRoute />
+          }
+        />
+
+
+        {/* =========================================
+            FALLBACK
+        ========================================= */}
+
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to="/"
+              replace
+            />
+          }
+        />
+
+      </Routes>
+
+    </>
   );
 }
 

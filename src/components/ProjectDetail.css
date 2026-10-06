@@ -2251,23 +2251,9 @@
 
   .case-horizontal {
 
-    position: relative;
-
     min-height: auto;
 
     padding: 100px 5vw;
-
-    overflow-x: auto;
-
-    overflow-y: hidden;
-
-    overscroll-behavior-x: contain;
-
-    -webkit-overflow-scrolling: touch;
-
-    scrollbar-width: none;
-
-    touch-action: pan-x pan-y;
 
     background:
 
@@ -2341,12 +2327,6 @@
 
   }
 
-  .case-horizontal::-webkit-scrollbar {
-
-    display: none;
-
-  }
-
   .case-horizontal-track {
 
     display: flex;
@@ -2355,35 +2335,61 @@
 
     align-items: center;
 
-    width: max-content;
+    width: 100%;
+
+    max-width: 100%;
 
     min-height: auto;
 
-    padding: 30px 5vw 80px;
+    height: auto;
+
+    padding: 35px 0 70px;
 
     gap: 10vw;
+
+    overflow-x: auto;
+
+    overflow-y: visible;
+
+    overscroll-behavior-x: contain;
+
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-x;
+
+    scroll-snap-type: x proximity;
+
+    scrollbar-width: none;
+
+  }
+
+  .case-horizontal-track::-webkit-scrollbar {
+
+    display: none;
 
   }
 
   .case-showcase-card {
 
-    width: 82vw;
+    width: 78vw;
 
-    max-width: 620px;
+    min-width: 78vw;
 
-    flex: 0 0 auto;
+    flex: 0 0 78vw;
+
+    scroll-snap-align: start;
 
   }
 
   .case-showcase-card.card-up {
 
-    transform: translateY(-28px) rotate(-1deg) !important;
+    transform: translateY(-24px) rotate(-1deg) !important;
 
   }
 
   .case-showcase-card.card-down {
 
-    transform: translateY(28px) rotate(1deg) !important;
+    transform: translateY(24px) rotate(1deg) !important;
 
   }
 
@@ -2920,7 +2926,7 @@
   }
 
   .case-horizontal {
-    padding: 80px 0;
+    padding: 80px 16px;
   }
 
   .case-horizontal-header {
@@ -2929,21 +2935,22 @@
   }
 
   .case-horizontal-track {
-    gap: 24px;
-    padding: 28px 16px 70px;
+    gap: 40px;
+    padding: 28px 0 55px;
   }
 
   .case-showcase-card {
-    width: 84vw;
-    max-width: 420px;
+    width: 82vw;
+    min-width: 82vw;
+    flex-basis: 82vw;
   }
 
   .case-showcase-card.card-up {
-    transform: translateY(-20px) rotate(-1deg) !important;
+    transform: translateY(-18px) rotate(-1deg) !important;
   }
 
   .case-showcase-card.card-down {
-    transform: translateY(20px) rotate(1deg) !important;
+    transform: translateY(18px) rotate(1deg) !important;
   }
 
   .case-showcase-image {
