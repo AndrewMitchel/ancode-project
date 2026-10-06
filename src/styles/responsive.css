@@ -1,13 +1,76 @@
-/* =========================================
-   MOBILE
-========================================= */
+/* =========================================================
+   ANCODE — GLOBAL RESPONSIVE SYSTEM
+   Desktop remains unchanged.
+   These rules focus on tablet + mobile usability.
+========================================================= */
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+  .section {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .projects {
+    gap: 105px;
+  }
+
+  .project-visual,
+  .project-info {
+    width: 88%;
+  }
+
+  .intro {
+    gap: 35px;
+  }
+
+  .services-heading {
+    margin-bottom: 100px;
+  }
+
+  .footer-top {
+    min-height: 260px;
+  }
+}
+
+/* =========================================================
+   MOBILE — 768px
+========================================================= */
 
 @media (max-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ---------- shared spacing ---------- */
+
+  .section {
+    width: 100%;
+    padding: 90px 20px;
+  }
+
+  .section-label {
+    margin-bottom: 60px;
+    padding-top: 10px;
+    font-size: 8px;
+  }
+
+  /* ---------- cursor ---------- */
 
   .custom-cursor,
   .mouse-spotlight {
-    display: none;
+    display: none !important;
   }
+
+  /* ---------- loader ---------- */
 
   .loader {
     padding: 25px 20px;
@@ -21,12 +84,18 @@
     font-size: 28vw;
   }
 
+  /* ---------- navbar ---------- */
+
   .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 20px;
-
     display: flex;
-
+    align-items: center;
     justify-content: space-between;
+    gap: 15px;
   }
 
   .logo {
@@ -38,45 +107,58 @@
   }
 
   .menu-status {
-    font-size: 9px;
+    margin-left: auto;
+    font-size: 8px;
+    white-space: nowrap;
   }
 
-  .hero {
-    min-height: 100svh;
+  .menu-status span {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+  }
 
+  /* ---------- hero ---------- */
+
+  .hero {
+    width: 100%;
+    min-height: 100svh;
+    min-height: 100dvh;
     padding: 0 20px 25px;
+    overflow: hidden;
   }
 
   .hero-content {
+    width: 100%;
     padding-top: 25vh;
   }
 
   .hero-eyebrow {
     font-size: 8px;
-
     margin-bottom: 35px;
   }
 
   .hero-title {
+    width: 100%;
+    max-width: 100%;
     font-size: 20vw;
-
     line-height: 0.8;
-
-    /*
-      Extra safety supaya WE
-      tidak kepotong di layar kecil.
-    */
+    letter-spacing: -0.09em;
     padding-left: 2px;
+    overflow: visible;
   }
 
   .hero-word-wrapper {
+    max-width: 100%;
     padding-top: 0.06em;
-
     margin-top: -0.06em;
+    overflow: visible;
   }
 
   .hero-word {
+    max-width: 100%;
     padding-right: 0.12em;
+    white-space: nowrap;
   }
 
   .hero-indent {
@@ -85,144 +167,221 @@
 
   .hero-description {
     position: relative;
-
     right: auto;
     bottom: auto;
-
+    width: min(100%, 280px);
     margin-top: 50px;
-
     font-size: 9px;
+    line-height: 1.55;
   }
 
-  .hero-floating {
-    display: none;
+  .hero-floating,
+  .hero-services {
+    display: none !important;
+  }
+
+  .hero-orbit-3d {
+    z-index: 5;
+    pointer-events: none;
   }
 
   .hero-bottom {
+    width: 100%;
     grid-template-columns: 1fr auto;
-
     gap: 20px;
+    font-size: 8px;
   }
 
-  .hero-services {
-    display: none;
+  .hero-location {
+    min-width: 0;
   }
 
-  .section {
-    padding: 90px 20px;
+  .scroll-indicator {
+    white-space: nowrap;
   }
 
-  .section-label {
-    margin-bottom: 60px;
+  .scroll-indicator span {
+    font-size: 7px;
   }
+
+  .scroll-arrow {
+    font-size: 18px;
+  }
+
+  /* ---------- intro ---------- */
 
   .intro {
     display: block;
-
     min-height: auto;
+    padding-top: 90px;
+    padding-bottom: 100px;
+  }
+
+  .intro-content {
+    width: 100%;
+    max-width: none;
   }
 
   .intro-content > p:first-child {
-    font-size: 11vw;
+    font-size: 10.5vw;
+    line-height: 0.98;
   }
 
   .intro-small {
     margin-top: 70px;
+    max-width: 100%;
+    font-size: 10px;
+    line-height: 1.75;
   }
 
-  /* =========================================
-     PROJECT / WORK
-     MOBILE RESPONSIVE
-  ========================================= */
+  /* ---------- work / projects ---------- */
+
+  .projects {
+    width: 100%;
+    gap: 80px;
+  }
+
+  .project-card {
+    width: 100%;
+  }
 
   .project-visual {
     width: 94%;
-
-    /*
-      Jangan gunakan tinggi viewport
-      di mobile karena gambar project
-      harus menentukan tinggi container.
-    */
     height: auto !important;
-
-    /*
-      Hapus minimum height yang sebelumnya
-      membuat ruang kosong besar di bawah gambar.
-    */
     min-height: 0 !important;
-
-    border-radius: 24px;
+    max-height: none !important;
+    border-radius: 22px;
   }
 
   .project-image {
-    width: 100%;
-
-    height: auto !important;
-
-    min-height: 0 !important;
-
-    max-height: none !important;
-
     display: block;
-
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     object-fit: contain;
-
-    border-radius: 23px;
+    border-radius: 21px;
   }
 
-  .visual-orb {
-    width: 55vw;
-    height: 55vw;
+  .visual-grid {
+    background-size: 45px 45px;
   }
 
-  .visual-title {
-    font-size: 24vw;
+  .visual-arrow {
+    right: 14px;
+    top: 14px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .project-hover-label {
+    display: none !important;
   }
 
   .project-info {
-    gap: 15px;
+    width: 94%;
+    padding-top: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 8px;
+  }
+
+  .project-info > div:first-child {
+    width: 100%;
+    gap: 12px;
+    align-items: baseline;
   }
 
   .project-info h3 {
-    font-size: 20px;
+    font-size: 25px;
+    line-height: 1;
+  }
+
+  .project-description {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 5px;
+    font-size: 9px;
+    line-height: 1.7;
+  }
+
+  .project-tags {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .project-tags span {
+    padding: 6px 8px;
+    font-size: 7px;
   }
 
   .project-type {
-    max-width: 120px;
+    width: 100%;
+    text-align: left;
+    line-height: 1.5;
   }
 
-  .projects {
-    gap: 80px;
-  }
+  /* ---------- marquee ---------- */
 
   .marquee-track {
     font-size: 18vw;
   }
 
+  /* ---------- services ---------- */
+
+  .services {
+    min-height: auto;
+  }
+
   .services-heading {
-    margin-bottom: 80px;
+    margin-bottom: 75px;
   }
 
   .services-heading h2 {
-    font-size: 20vw;
+    font-size: 19vw;
+    line-height: 0.78;
   }
 
   .service-item {
-    grid-template-columns: 45px 1fr 35px;
+    grid-template-columns: 38px minmax(0, 1fr) 30px;
+    min-height: 82px;
+    gap: 8px;
+  }
 
-    min-height: 90px;
+  .service-item:hover {
+    padding: 0 10px;
   }
 
   .service-item h3 {
-    font-size: 6vw;
+    min-width: 0;
+    font-size: 5.8vw;
+    line-height: 1;
   }
 
+  .service-arrow {
+    font-size: 20px;
+  }
+
+  /* ---------- statement ---------- */
+
   .statement {
-    min-height: 80vh;
+    min-height: 80svh;
+    min-height: 80dvh;
+    padding: 90px 20px;
+  }
+
+  .statement-content {
+    width: 100%;
   }
 
   .statement-word {
-    font-size: 19vw;
+    font-size: 18.5vw;
+    line-height: 0.8;
+    white-space: nowrap;
   }
 
   .statement-word:nth-child(2) {
@@ -237,67 +396,325 @@
     padding-left: 10vw;
   }
 
+  /* ---------- contact ---------- */
+
   .contact {
-    min-height: 80vh;
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 110px;
+  }
+
+  .contact-content {
+    width: 100%;
+  }
+
+  .contact-small {
+    font-size: 9px;
+    margin-bottom: 45px;
   }
 
   .contact-content h2 {
-    font-size: 20vw;
+    font-size: 19vw;
+    line-height: 0.78;
+    overflow-wrap: normal;
   }
 
   .contact-button {
-    margin-top: 70px;
+    margin-top: 65px;
+    padding: 17px 22px;
+    gap: 20px;
+    font-size: 9px;
+  }
+
+  /* ---------- footer ---------- */
+
+  .footer {
+    padding: 55px 20px 25px;
+    font-size: 8px;
   }
 
   .footer-top {
+    min-height: auto;
     grid-template-columns: 1fr 1fr;
-
-    gap: 50px;
+    gap: 45px 25px;
+    padding-bottom: 70px;
   }
 
   .footer-logo {
     grid-column: 1 / -1;
+    font-size: 18vw;
   }
 
   .footer-bottom {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    padding-top: 18px;
+    line-height: 1.5;
+  }
 
-    gap: 15px;
+  /* ---------- modal ---------- */
+
+  .project-modal-layer {
+    padding: 10px;
+  }
+
+  .project-modal {
+    width: 100%;
+    max-width: 100%;
+    height: 94dvh;
+    padding: 20px;
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    padding: 9px 12px;
+  }
+
+  .modal-visual {
+    height: 40dvh;
+    min-height: 260px;
+  }
+
+  .modal-visual-shape {
+    width: 55vw;
+    height: 55vw;
+    min-width: 160px;
+    min-height: 160px;
+  }
+
+  .modal-info {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 40px 0;
+  }
+
+  .modal-info h2 {
+    font-size: 23vw;
+  }
+
+  .modal-description > p {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 }
 
-
-/* =========================================
-   EXTRA SMALL MOBILE
-========================================= */
+/* =========================================================
+   EXTRA SMALL — 480px
+========================================================= */
 
 @media (max-width: 480px) {
+  .section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .section-label {
+    margin-bottom: 50px;
+    font-size: 7px;
+  }
+
+  .navbar {
+    padding: 17px 16px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .menu-status {
+    font-size: 7px;
+  }
+
+  .hero {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-content {
+    padding-top: 23vh;
+  }
+
+  .hero-title {
+    font-size: 19.5vw;
+  }
+
+  .hero-indent {
+    padding-left: 6vw;
+  }
+
+  .hero-description {
+    width: min(100%, 245px);
+    margin-top: 42px;
+    font-size: 8px;
+  }
+
+  .hero-bottom {
+    gap: 12px;
+    font-size: 7px;
+  }
+
+  .hero-location {
+    gap: 6px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+  }
+
+  .scroll-indicator span {
+    font-size: 6px;
+  }
+
+  .scroll-arrow {
+    font-size: 16px;
+  }
+
+  .intro {
+    padding-top: 75px;
+    padding-bottom: 85px;
+  }
+
+  .intro-content > p:first-child {
+    font-size: 10.3vw;
+  }
+
+  .intro-small {
+    margin-top: 55px;
+    font-size: 9px;
+  }
+
+  .projects {
+    gap: 70px;
+  }
 
   .project-visual {
     width: 96%;
-
-    /*
-      Tetap mengikuti tinggi gambar.
-      Tidak boleh ada tinggi minimum
-      yang membuat ruang kosong.
-    */
-    height: auto !important;
-
-    min-height: 0 !important;
-
-    border-radius: 20px;
+    border-radius: 18px;
   }
 
   .project-image {
-    width: 100%;
-
-    height: auto !important;
-
-    min-height: 0 !important;
-
-    max-height: none !important;
-
-    border-radius: 19px;
+    border-radius: 17px;
   }
 
+  .visual-arrow {
+    right: 10px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .project-info {
+    width: 96%;
+  }
+
+  .project-info h3 {
+    font-size: 23px;
+  }
+
+  .project-description {
+    font-size: 8px;
+  }
+
+  .project-tags {
+    gap: 5px;
+  }
+
+  .project-tags span {
+    padding: 5px 7px;
+    font-size: 6.5px;
+  }
+
+  .services-heading {
+    margin-bottom: 60px;
+  }
+
+  .services-heading h2 {
+    font-size: 18.5vw;
+  }
+
+  .service-item {
+    grid-template-columns: 30px minmax(0, 1fr) 24px;
+    min-height: 76px;
+  }
+
+  .service-item h3 {
+    font-size: 5.6vw;
+  }
+
+  .service-arrow {
+    font-size: 18px;
+  }
+
+  .statement {
+    min-height: auto;
+    padding-top: 80px;
+    padding-bottom: 90px;
+  }
+
+  .statement-word {
+    font-size: 18vw;
+  }
+
+  .contact {
+    padding-top: 85px;
+    padding-bottom: 90px;
+  }
+
+  .contact-small {
+    margin-bottom: 38px;
+    font-size: 8px;
+  }
+
+  .contact-content h2 {
+    font-size: 18.5vw;
+  }
+
+  .contact-button {
+    margin-top: 55px;
+    padding: 15px 18px;
+    font-size: 8px;
+    gap: 15px;
+  }
+
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 18px;
+    padding-bottom: 55px;
+  }
+
+  .footer-logo {
+    font-size: 17vw;
+  }
+
+  .footer-bottom {
+    gap: 10px;
+    font-size: 7px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot,
+  .scroll-arrow {
+    animation: none !important;
+  }
 }
