@@ -1,17 +1,11 @@
-import {
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
-
+import { useEffect, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
-
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import CustomCursor from "./CustomCursor";
-
 import { projects } from "../data/data";
+import { photoData } from "../data/photoData";
 
 import "./ProjectDetail.css";
 
@@ -23,102 +17,162 @@ function ProjectDetail({ project }) {
   const progressRef = useRef(null);
 
   // ============================================================
-  // GALLERY
+  // PHOTO DATA
+  //
+  // data.js:
+  // hero: "C1"
+  // horizontal: ["C2", "C3", "C4"]
+  // vertical: ["C5", ...]
+  //
+  // photoData.js:
+  // C1 -> coffeespot1.png
+  // C2 -> coffeespot2.png
+  // dst.
   // ============================================================
 
-  const gallery = useMemo(() => {
-    if (!project) return [];
-
-    if (project.gallery?.length) {
-      return project.gallery.filter(
-        (item) => item?.image
-      );
+  const getPhoto = (id) => {
+    if (!id) {
+      return null;
     }
 
-    return (
-      project.images
-        ?.filter(Boolean)
-        .map((image, index) => ({
-          image,
+    return photoData?.[id] || null;
+  };
 
-          title:
-            `SCREEN ${String(
-              index + 1
-            ).padStart(2, "0")}`,
+  // ============================================================
+  // HERO
+  // ============================================================
 
-          description:
-            "A detailed view of the digital experience and interface.",
-        })) || []
-    );
+  const heroItem = useMemo(() => {
+    if (!project?.hero) {
+      return null;
+    }
+
+    const photo = getPhoto(project.hero);
+
+    if (!photo?.image) {
+      return null;
+    }
+
+    return {
+      id: project.hero,
+      ...photo,
+    };
   }, [project]);
 
   // ============================================================
-  // HORIZONTAL IMAGES
+  // HORIZONTAL
   // ============================================================
 
   const horizontalImages = useMemo(() => {
-    if (!project) return [];
-
-    const galleryMap = new Map(
-      gallery.map((item) => [
-        item.image,
-        item,
-      ])
-    );
-
-    if (project.horizontalImages?.length) {
-      return project.horizontalImages
-        .map((item) => {
-          if (typeof item === "object") {
-            return item;
-          }
-
-          return galleryMap.get(item);
-        })
-        .filter(Boolean);
+    if (!project) {
+      return [];
     }
 
-    return gallery.slice(1, 4);
-  }, [project, gallery]);
+    return (project.horizontal || [])
+      .map((id) => {
+        const photo = getPhoto(id);
+
+        if (!photo?.image) {
+          return null;
+        }
+
+        return {
+          id,
+          ...photo,
+        };
+      })
+      .filter(Boolean);
+  }, [project]);
 
   // ============================================================
-  // VERTICAL IMAGES
+  // VERTICAL
   // ============================================================
 
   const verticalImages = useMemo(() => {
-    if (!project) return [];
-
-    const galleryMap = new Map(
-      gallery.map((item) => [
-        item.image,
-        item,
-      ])
-    );
-
-    if (project.verticalImages?.length) {
-      return project.verticalImages
-        .map((item) => {
-          if (typeof item === "object") {
-            return item;
-          }
-
-          return galleryMap.get(item);
-        })
-        .filter(Boolean);
+    if (!project) {
+      return [];
     }
 
-    return gallery.slice(4);
-  }, [project, gallery]);
+    return (project.vertical || [])
+      .map((id) => {
+        const photo = getPhoto(id);
+
+        if (!photo?.image) {
+          return null;
+        }
+
+        return {
+          id,
+          ...photo,
+        };
+      })
+      .filter(Boolean);
+  }, [project]);
+
+  // ============================================================
+  // ALL GALLERY
+  // ============================================================
+
+  const gallery = useMemo(() => {
+    if (!project) {
+      return [];
+    }
+
+    const items = [];
+
+    if (heroItem) {
+      items.push(heroItem);
+    }
+
+    items.push(...horizontalImages);
+    items.push(...verticalImages);
+
+    return items;
+  }, [
+    project,
+    heroItem,
+    horizontalImages,
+    verticalImages,
+  ]);
+
+  // ============================================================
+  // HERO IMAGE
+  // ============================================================
+
+  const heroImage =
+    heroItem?.image ||
+    horizontalImages[0]?.image ||
+    verticalImages[0]?.image ||
+    null;
+
+  // ============================================================
+  // NEXT PROJECT
+  // ============================================================
+
+  const nextProject = useMemo(() => {
+    if (!project || !projects?.length) {
+      return null;
+    }
+
+    const currentIndex = projects.findIndex(
+      (item) => item.slug === project.slug
+    );
+
+    if (currentIndex === -1) {
+      return null;
+    }
+
+    return projects[
+      (currentIndex + 1) % projects.length
+    ];
+  }, [project]);
 
   // ============================================================
   // GSAP
   // ============================================================
 
   useEffect(() => {
-    if (
-      !project ||
-      !pageRef.current
-    ) {
+    if (!project || !pageRef.current) {
       return;
     }
 
@@ -129,12 +183,11 @@ function ProjectDetail({ project }) {
       // HERO
       // ========================================================
 
-      const heroTimeline =
-        gsap.timeline({
-          defaults: {
-            ease: "power4.out",
-          },
-        });
+      const heroTimeline = gsap.timeline({
+        defaults: {
+          ease: "power4.out",
+        },
+      });
 
       heroTimeline
         .from(".case-topbar", {
@@ -142,7 +195,6 @@ function ProjectDetail({ project }) {
           opacity: 0,
           duration: 0.7,
         })
-
         .from(
           ".case-index",
           {
@@ -152,7 +204,6 @@ function ProjectDetail({ project }) {
           },
           "-=0.35"
         )
-
         .from(
           ".case-kicker",
           {
@@ -162,7 +213,6 @@ function ProjectDetail({ project }) {
           },
           "-=0.4"
         )
-
         .from(
           ".case-title-line",
           {
@@ -172,7 +222,6 @@ function ProjectDetail({ project }) {
           },
           "-=0.35"
         )
-
         .from(
           ".case-description",
           {
@@ -182,7 +231,6 @@ function ProjectDetail({ project }) {
           },
           "-=0.6"
         )
-
         .from(
           ".case-hero-frame",
           {
@@ -199,34 +247,23 @@ function ProjectDetail({ project }) {
 
       gsap.to(".case-hero-image", {
         scale: 1.08,
-
         yPercent: 10,
-
         ease: "none",
-
         scrollTrigger: {
           trigger: ".case-hero",
-
           start: "top top",
-
           end: "bottom top",
-
           scrub: 1.2,
         },
       });
 
       gsap.to(".case-hero-title", {
         yPercent: -25,
-
         ease: "none",
-
         scrollTrigger: {
           trigger: ".case-hero",
-
           start: "top top",
-
           end: "bottom top",
-
           scrub: 1,
         },
       });
@@ -237,40 +274,28 @@ function ProjectDetail({ project }) {
 
       gsap.to(progressRef.current, {
         scaleY: 1,
-
         ease: "none",
-
         scrollTrigger: {
           trigger: page,
-
           start: "top top",
-
           end: "bottom bottom",
-
           scrub: true,
         },
       });
 
       // ========================================================
-      // STATEMENT
+      // IDEA TEXT
       // ========================================================
 
       gsap.from(".case-statement-word", {
         yPercent: 100,
-
         opacity: 0,
-
         stagger: 0.1,
-
         duration: 1,
-
         ease: "power4.out",
-
         scrollTrigger: {
           trigger: ".case-statement",
-
           start: "top 75%",
-
           once: true,
         },
       });
@@ -281,38 +306,25 @@ function ProjectDetail({ project }) {
 
       gsap.from(".case-info-copy", {
         y: 70,
-
         opacity: 0,
-
         duration: 0.9,
-
         ease: "power4.out",
-
         scrollTrigger: {
           trigger: ".case-info",
-
           start: "top 75%",
-
           once: true,
         },
       });
 
       gsap.from(".case-meta-item", {
         y: 35,
-
         opacity: 0,
-
         duration: 0.7,
-
         stagger: 0.1,
-
         ease: "power3.out",
-
         scrollTrigger: {
           trigger: ".case-meta",
-
           start: "top 80%",
-
           once: true,
         },
       });
@@ -322,21 +334,21 @@ function ProjectDetail({ project }) {
       // ========================================================
 
       const horizontalSection =
-        page.querySelector(
+        document.querySelector(
           ".case-horizontal"
         );
 
       const horizontalTrack =
-        page.querySelector(
+        document.querySelector(
           ".case-horizontal-track"
         );
 
       if (
         horizontalSection &&
         horizontalTrack &&
-        horizontalImages.length
+        horizontalImages.length > 0
       ) {
-        const cards =
+        const horizontalCards =
           gsap.utils.toArray(
             ".case-showcase-card"
           );
@@ -345,7 +357,6 @@ function ProjectDetail({ project }) {
           const getDistance = () =>
             Math.max(
               0,
-
               horizontalTrack.scrollWidth -
                 window.innerWidth +
                 window.innerWidth * 0.15
@@ -353,32 +364,23 @@ function ProjectDetail({ project }) {
 
           gsap.to(horizontalTrack, {
             x: () => -getDistance(),
-
             ease: "none",
-
             scrollTrigger: {
-              trigger:
-                horizontalSection,
-
+              trigger: horizontalSection,
               start: "top top",
-
               end: () =>
                 `+=${Math.max(
                   900,
                   getDistance() * 1.15
                 )}`,
-
               scrub: 1,
-
               pin: true,
-
               anticipatePin: 1,
-
               invalidateOnRefresh: true,
             },
           });
 
-          cards.forEach(
+          horizontalCards.forEach(
             (card, index) => {
               gsap.to(card, {
                 rotate:
@@ -418,145 +420,84 @@ function ProjectDetail({ project }) {
       // ========================================================
 
       gsap.utils
-        .toArray(
-          ".case-vertical-card"
-        )
-        .forEach(
-          (card, index) => {
-            const image =
-              card.querySelector(
-                ".case-vertical-image"
-              );
+        .toArray(".case-vertical-card")
+        .forEach((card, index) => {
+          const image =
+            card.querySelector(
+              ".case-vertical-image"
+            );
 
-            gsap.from(card, {
-              y: 120,
+          gsap.from(card, {
+            y: 120,
+            opacity: 0,
 
-              opacity: 0,
+            rotate:
+              index % 2 === 0
+                ? -2
+                : 2,
 
-              rotate:
-                index % 2 === 0
-                  ? -2
-                  : 2,
+            duration: 1.1,
 
-              duration: 1.1,
+            ease: "power4.out",
 
-              ease: "power4.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              once: true,
+            },
+          });
+
+          if (image) {
+            gsap.to(image, {
+              yPercent: -8,
+              scale: 1.05,
+              ease: "none",
 
               scrollTrigger: {
                 trigger: card,
-
-                start: "top 85%",
-
-                once: true,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
               },
             });
-
-            if (image) {
-              gsap.to(image, {
-                yPercent: -8,
-
-                scale: 1.05,
-
-                ease: "none",
-
-                scrollTrigger: {
-                  trigger: card,
-
-                  start:
-                    "top bottom",
-
-                  end:
-                    "bottom top",
-
-                  scrub: 1,
-                },
-              });
-            }
           }
-        );
+        });
 
       // ========================================================
-      // NUMBERS
+      // VERTICAL IMAGE NUMBER
       // ========================================================
 
       gsap.utils
-        .toArray(
-          ".case-vertical-number"
-        )
+        .toArray(".case-vertical-number")
         .forEach((number) => {
           gsap.from(number, {
             x: -30,
-
             opacity: 0,
-
             duration: 0.7,
-
             ease: "power3.out",
 
             scrollTrigger: {
               trigger: number,
-
               start: "top 85%",
-
               once: true,
             },
           });
         });
 
       // ========================================================
-      // DESCRIPTION ANIMATION
-      // ========================================================
-
-      gsap.utils
-        .toArray(
-          ".case-showcase-description, .case-vertical-description"
-        )
-        .forEach(
-          (description) => {
-            gsap.from(
-              description,
-              {
-                y: 30,
-
-                opacity: 0,
-
-                duration: 0.7,
-
-                ease: "power3.out",
-
-                scrollTrigger: {
-                  trigger:
-                    description,
-
-                  start: "top 85%",
-
-                  once: true,
-                },
-              }
-            );
-          }
-        );
-
-      // ========================================================
-      // TECH
+      // TECH STACK
       // ========================================================
 
       gsap.from(".case-tech-item", {
         y: 40,
-
         opacity: 0,
-
         duration: 0.7,
-
         stagger: 0.08,
-
         ease: "power3.out",
 
         scrollTrigger: {
           trigger: ".case-tech-list",
-
           start: "top 80%",
-
           once: true,
         },
       });
@@ -565,43 +506,36 @@ function ProjectDetail({ project }) {
       // FINAL IMAGE
       // ========================================================
 
-      gsap.from(".case-final-image-inner", {
-        scale: 0.88,
+      gsap.from(
+        ".case-final-image-inner",
+        {
+          scale: 0.88,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out",
 
-        opacity: 0,
-
-        duration: 1.2,
-
-        ease: "power4.out",
-
-        scrollTrigger: {
-          trigger:
-            ".case-final-image",
-
-          start: "top 80%",
-
-          once: true,
-        },
-      });
+          scrollTrigger: {
+            trigger: ".case-final-image",
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
 
       // ========================================================
-      // BACK TO TOP
+      // NEXT PROJECT
       // ========================================================
 
-      gsap.from(".case-back-top-link", {
-        y: 50,
-
+      gsap.from(".case-next-title span", {
+        yPercent: 120,
         opacity: 0,
-
-        duration: 0.9,
-
+        duration: 1,
+        stagger: 0.08,
         ease: "power4.out",
 
         scrollTrigger: {
           trigger: ".case-next",
-
-          start: "top 85%",
-
+          start: "top 75%",
           once: true,
         },
       });
@@ -610,40 +544,31 @@ function ProjectDetail({ project }) {
       // CURSOR
       // ========================================================
 
-      const cursor =
-        cursorRef.current;
+      const cursor = cursorRef.current;
 
       if (cursor) {
-        const moveX =
-          gsap.quickTo(
-            cursor,
-            "x",
-            {
-              duration: 0.18,
-              ease: "power3.out",
-            }
-          );
+        const moveX = gsap.quickTo(
+          cursor,
+          "x",
+          {
+            duration: 0.18,
+            ease: "power3.out",
+          }
+        );
 
-        const moveY =
-          gsap.quickTo(
-            cursor,
-            "y",
-            {
-              duration: 0.18,
-              ease: "power3.out",
-            }
-          );
+        const moveY = gsap.quickTo(
+          cursor,
+          "y",
+          {
+            duration: 0.18,
+            ease: "power3.out",
+          }
+        );
 
-        const mouseMove =
-          (event) => {
-            moveX(
-              event.clientX
-            );
-
-            moveY(
-              event.clientY
-            );
-          };
+        const mouseMove = (event) => {
+          moveX(event.clientX);
+          moveY(event.clientY);
+        };
 
         window.addEventListener(
           "mousemove",
@@ -652,88 +577,79 @@ function ProjectDetail({ project }) {
 
         const interactive =
           page.querySelectorAll(
-            "a, .case-showcase-image, .case-vertical-image-wrap, .case-back-top-link"
+            "a, .case-image-wrap, .case-showcase-image"
           );
 
         const handlers = [];
 
-        interactive.forEach(
-          (item) => {
-            const enter = () => {
-              cursor.classList.add(
-                "cursor-invert"
-              );
-
-              gsap.to(cursor, {
-                width: 88,
-
-                height: 88,
-
-                duration: 0.3,
-
-                ease: "power3.out",
-              });
-            };
-
-            const leave = () => {
-              cursor.classList.remove(
-                "cursor-invert"
-              );
-
-              gsap.to(cursor, {
-                width: 54,
-
-                height: 54,
-
-                duration: 0.3,
-
-                ease: "power3.out",
-              });
-            };
-
-            item.addEventListener(
-              "mouseenter",
-              enter
+        interactive.forEach((item) => {
+          const enter = () => {
+            cursor.classList.add(
+              "cursor-invert"
             );
 
-            item.addEventListener(
-              "mouseleave",
-              leave
+            gsap.to(cursor, {
+              width: 88,
+              height: 88,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          };
+
+          const leave = () => {
+            cursor.classList.remove(
+              "cursor-invert"
             );
 
-            handlers.push({
+            gsap.to(cursor, {
+              width: 54,
+              height: 54,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          };
+
+          item.addEventListener(
+            "mouseenter",
+            enter
+          );
+
+          item.addEventListener(
+            "mouseleave",
+            leave
+          );
+
+          handlers.push({
+            item,
+            enter,
+            leave,
+          });
+        });
+
+        page._cursorCleanup = () => {
+          window.removeEventListener(
+            "mousemove",
+            mouseMove
+          );
+
+          handlers.forEach(
+            ({
               item,
               enter,
               leave,
-            });
-          }
-        );
+            }) => {
+              item.removeEventListener(
+                "mouseenter",
+                enter
+              );
 
-        page._cursorCleanup =
-          () => {
-            window.removeEventListener(
-              "mousemove",
-              mouseMove
-            );
-
-            handlers.forEach(
-              ({
-                item,
-                enter,
-                leave,
-              }) => {
-                item.removeEventListener(
-                  "mouseenter",
-                  enter
-                );
-
-                item.removeEventListener(
-                  "mouseleave",
-                  leave
-                );
-              }
-            );
-          };
+              item.removeEventListener(
+                "mouseleave",
+                leave
+              );
+            }
+          );
+        };
       }
     }, page);
 
@@ -751,7 +667,7 @@ function ProjectDetail({ project }) {
   ]);
 
   // ============================================================
-  // 404
+  // NOT FOUND
   // ============================================================
 
   if (!project) {
@@ -777,34 +693,12 @@ function ProjectDetail({ project }) {
   }
 
   // ============================================================
-  // HERO IMAGE
+  // TITLE
   // ============================================================
 
-  const heroImage =
-    gallery[0]?.image ||
-    horizontalImages[0]?.image ||
-    verticalImages[0]?.image ||
-    null;
-
-  const titleWords =
-    project.title
-      .split(" ")
-      .filter(Boolean);
-
-  // ============================================================
-  // BACK TO TOP FUNCTION
-  // ============================================================
-
-  const handleBackToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  // ============================================================
-  // RENDER
-  // ============================================================
+  const titleWords = project.title
+    .split(" ")
+    .filter(Boolean);
 
   return (
     <>
@@ -816,9 +710,9 @@ function ProjectDetail({ project }) {
         ref={pageRef}
         className="case-page"
       >
-        {/* =====================================================
+        {/* =====================================
             PROGRESS
-        ===================================================== */}
+        ===================================== */}
 
         <div className="case-progress">
           <div
@@ -827,9 +721,9 @@ function ProjectDetail({ project }) {
           />
         </div>
 
-        {/* =====================================================
+        {/* =====================================
             NAV
-        ===================================================== */}
+        ===================================== */}
 
         <header className="case-topbar">
           <Link
@@ -851,9 +745,9 @@ function ProjectDetail({ project }) {
           </div>
         </header>
 
-        {/* =====================================================
+        {/* =====================================
             HERO
-        ===================================================== */}
+        ===================================== */}
 
         <section className="case-hero">
           <div className="case-index">
@@ -921,7 +815,10 @@ function ProjectDetail({ project }) {
               <img
                 className="case-hero-image"
                 src={heroImage}
-                alt={project.title}
+                alt={
+                  heroItem?.title ||
+                  project.title
+                }
               />
 
               <div className="case-hero-overlay">
@@ -937,9 +834,9 @@ function ProjectDetail({ project }) {
           )}
         </section>
 
-        {/* =====================================================
+        {/* =====================================
             IDEA
-        ===================================================== */}
+        ===================================== */}
 
         <section className="case-statement">
           <div className="case-section-number">
@@ -976,9 +873,9 @@ function ProjectDetail({ project }) {
           </p>
         </section>
 
-        {/* =====================================================
-            PROJECT INFO
-        ===================================================== */}
+        {/* =====================================
+            INFO
+        ===================================== */}
 
         <section className="case-info">
           <div className="case-section-number">
@@ -1041,11 +938,12 @@ function ProjectDetail({ project }) {
           </div>
         </section>
 
-        {/* =====================================================
-            HORIZONTAL GALLERY
-        ===================================================== */}
+        {/* =====================================
+            HORIZONTAL
+        ===================================== */}
 
-        {horizontalImages.length > 0 && (
+        {horizontalImages.length >
+          0 && (
           <section className="case-horizontal">
             <div className="case-horizontal-header">
               <span>
@@ -1059,51 +957,54 @@ function ProjectDetail({ project }) {
 
             <div className="case-horizontal-track">
               {horizontalImages.map(
-                (item, index) => (
+                (
+                  item,
+                  index
+                ) => (
                   <article
                     className={`case-showcase-card ${
                       index % 2 === 0
                         ? "card-up"
                         : "card-down"
                     }`}
-                    key={`${item.image}-${index}`}
+                    key={item.id}
                   >
                     <div className="case-showcase-number">
-                      {String(
-                        index + 2
-                      ).padStart(
-                        2,
-                        "0"
-                      )}
+                      {item.id}
                     </div>
 
                     <div className="case-showcase-image">
                       <img
-                        src={item.image}
-                        alt={`${project.title} ${item.title}`}
+                        src={
+                          item.image
+                        }
+                        alt={
+                          item.title ||
+                          `${project.title} screen ${
+                            index +
+                            2
+                          }`
+                        }
                         loading="lazy"
                       />
                     </div>
 
                     <div className="case-showcase-caption">
-                      <div className="case-showcase-caption-top">
-                        <span>
+                      <div>
+                        <strong>
                           {item.title}
-                        </span>
+                        </strong>
 
-                        <span>
-                          {String(
-                            index + 2
-                          ).padStart(
-                            2,
-                            "0"
-                          )}
-                        </span>
+                        <p>
+                          {
+                            item.description
+                          }
+                        </p>
                       </div>
 
-                      <p className="case-showcase-description">
-                        {item.description}
-                      </p>
+                      <span>
+                        ↗
+                      </span>
                     </div>
                   </article>
                 )
@@ -1112,11 +1013,12 @@ function ProjectDetail({ project }) {
           </section>
         )}
 
-        {/* =====================================================
-            VERTICAL GALLERY
-        ===================================================== */}
+        {/* =====================================
+            VERTICAL STORY
+        ===================================== */}
 
-        {verticalImages.length > 0 && (
+        {verticalImages.length >
+          0 && (
           <section className="case-vertical">
             <div className="case-vertical-header">
               <div className="case-section-number">
@@ -1132,70 +1034,66 @@ function ProjectDetail({ project }) {
 
             <div className="case-vertical-list">
               {verticalImages.map(
-                (item, index) => (
+                (
+                  item,
+                  index
+                ) => (
                   <article
                     className={`case-vertical-card vertical-${
                       index % 3
                     }`}
-                    key={`${item.image}-${index}`}
+                    key={item.id}
                   >
                     <div className="case-vertical-number">
-                      {String(
-                        index +
-                          horizontalImages.length +
-                          2
-                      ).padStart(
-                        2,
-                        "0"
-                      )}
+                      {item.id}
                     </div>
 
                     <div className="case-vertical-image-wrap">
                       <img
                         className="case-vertical-image"
-                        src={item.image}
-                        alt={`${project.title} ${item.title}`}
+                        src={
+                          item.image
+                        }
+                        alt={
+                          item.title ||
+                          `${project.title} detail ${
+                            index +
+                            1
+                          }`
+                        }
                         loading="lazy"
                       />
 
                       <div className="case-vertical-overlay">
                         <span>
-                          {project.title}
+                          {
+                            project.title
+                          }
                         </span>
 
                         <span>
                           DETAIL /{" "}
-                          {String(
-                            index + 1
-                          ).padStart(
-                            2,
-                            "0"
-                          )}
+                          {item.id}
                         </span>
                       </div>
                     </div>
 
                     <div className="case-vertical-caption">
-                      <div className="case-vertical-caption-top">
-                        <span>
+                      <span>
+                        {item.id}
+                      </span>
+
+                      <div>
+                        <strong>
                           {item.title}
-                        </span>
+                        </strong>
 
-                        <span>
-                          {String(
-                            index +
-                              horizontalImages.length +
-                              2
-                          ).padStart(
-                            2,
-                            "0"
-                          )}
-                        </span>
+                        <p>
+                          {
+                            item.description
+                          }
+                        </p>
                       </div>
-
-                      <p className="case-vertical-description">
-                        {item.description}
-                      </p>
                     </div>
                   </article>
                 )
@@ -1204,9 +1102,9 @@ function ProjectDetail({ project }) {
           </section>
         )}
 
-        {/* =====================================================
+        {/* =====================================
             TECHNOLOGY
-        ===================================================== */}
+        ===================================== */}
 
         <section className="case-tech">
           <div className="case-section-number">
@@ -1217,7 +1115,10 @@ function ProjectDetail({ project }) {
             <h2>
               BUILT
               <br />
-              TO <em>PERFORM.</em>
+              TO{" "}
+              <em>
+                PERFORM.
+              </em>
             </h2>
 
             <p>
@@ -1230,8 +1131,13 @@ function ProjectDetail({ project }) {
             </p>
 
             <div className="case-tech-list">
-              {(project.stack || []).map(
-                (item, index) => (
+              {(project.stack ||
+                []
+              ).map(
+                (
+                  item,
+                  index
+                ) => (
                   <div
                     className="case-tech-item"
                     key={item}
@@ -1249,7 +1155,9 @@ function ProjectDetail({ project }) {
                       {item}
                     </strong>
 
-                    <b>↗</b>
+                    <b>
+                      ↗
+                    </b>
                   </div>
                 )
               )}
@@ -1257,16 +1165,18 @@ function ProjectDetail({ project }) {
           </div>
         </section>
 
-        {/* =====================================================
-            FINAL IMAGE
-        ===================================================== */}
+        {/* =====================================
+            FINAL
+        ===================================== */}
 
         {heroImage && (
           <section className="case-final-image">
             <div className="case-final-image-inner">
               <img
                 src={heroImage}
-                alt={project.title}
+                alt={
+                  project.title
+                }
               />
 
               <div className="case-final-overlay">
@@ -1282,30 +1192,51 @@ function ProjectDetail({ project }) {
           </section>
         )}
 
-        {/* =====================================================
-            BACK TO TOP
-        ===================================================== */}
+        {/* =====================================
+            NEXT
+        ===================================== */}
 
         <section className="case-next">
-          <button
-            type="button"
-            className="case-back-top-link"
-            onClick={handleBackToTop}
-            aria-label="Back to top"
-          >
-            <span className="case-back-top-text">
-              BACK TO TOP
+          <div className="case-next-label">
+            <span>
+              NEXT PROJECT
             </span>
 
-            <span className="case-back-top">
-              ↑
+            <span>
+              ↘
             </span>
-          </button>
+          </div>
+
+          <Link
+            to={
+              nextProject?.slug
+                ? `/project/${nextProject.slug}`
+                : "/"
+            }
+            className="case-next-link"
+          >
+            <div className="case-next-title">
+              <span>
+                {nextProject?.title ||
+                  "BACK"}
+              </span>
+
+              {!nextProject?.title && (
+                <span>
+                  TO WORK
+                </span>
+              )}
+            </div>
+
+            <div className="case-next-arrow">
+              ↗
+            </div>
+          </Link>
         </section>
 
-        {/* =====================================================
+        {/* =====================================
             FOOTER
-        ===================================================== */}
+        ===================================== */}
 
         <footer className="case-footer">
           <span>
