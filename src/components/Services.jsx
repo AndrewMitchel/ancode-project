@@ -5,14 +5,14 @@ function Services({ services }) {
     "WEB DEVELOPMENT":
       "Halo, saya tertarik dengan layanan Web Development. Saya ingin membuat website dan ingin berdiskusi mengenai project saya",
 
-    "WEB APPLICATION":
-      "Halo, saya tertarik dengan layanan Web Application. Saya ingin membuat aplikasi berbasis web dan ingin berdiskusi mengenai project saya",
-
     "MOBILE APPLICATION":
       "Halo, saya tertarik dengan layanan Mobile Application. Saya ingin membuat aplikasi mobile dan ingin berdiskusi mengenai project saya",
 
     "UI/UX DESIGN":
       "Halo, saya tertarik dengan layanan UI/UX Design. Saya ingin mendiskusikan kebutuhan desain UI/UX untuk project saya",
+
+    "JOKI TUGAS":
+      "Halo, saya tertarik dengan layanan Joki Tugas. Saya ingin konsultasi mengenai tugas yang saya butuhkan.",
   };
 
   const handleServiceClick = (service) => {
@@ -67,6 +67,7 @@ function Services({ services }) {
         {services.map((service, index) => (
 
           <div
+            id={service === "JOKI TUGAS" ? "joki-tugas" : undefined}
             className="service-item reveal"
             key={service}
             onClick={() =>

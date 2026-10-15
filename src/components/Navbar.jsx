@@ -15,6 +15,10 @@ function Navbar() {
           SERVICES
         </a>
 
+        <a href="#joki-tugas">
+          JOKI TUGAS
+        </a>
+
         <a href="#contact">
           CONTACT
         </a>

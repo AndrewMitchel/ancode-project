@@ -238,8 +238,7 @@ export const projects = [
 
 export const services = [
   "WEB DEVELOPMENT",
-  "WEB APPLICATION",
   "MOBILE APPLICATION",
   "UI / UX DESIGN",
-  "CUSTOM SOFTWARE",
+  "JOKI TUGAS",
 ];
