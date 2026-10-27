@@ -16,7 +16,7 @@ function Navbar() {
         </a>
 
         <a href="#joki-tugas">
-          JOKI TEMPEK
+          JOKI TUGAS
         </a>
 
         <a href="#contact">
