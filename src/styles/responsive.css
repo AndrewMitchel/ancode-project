@@ -41,16 +41,10 @@
 }
 
 /* =========================================================
-   TABLET NAVIGATION — keep desktop layout unchanged
+   SHARED MOBILE MENU BUTTON — ICON ONLY
 ========================================================= */
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-  }
-
+@media (max-width: 1024px) {
   .mobile-menu-toggle {
     display: flex;
     width: 40px;
@@ -61,23 +55,42 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    border: 1px solid rgba(181, 232, 76, 0.38);
-    border-radius: 50%;
-    background: rgba(181, 232, 76, 0.12);
+
+    /* Icon only: no circle, border, or background. */
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
     color: #fff;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    backdrop-filter: blur(14px) saturate(145%);
-    -webkit-backdrop-filter: blur(14px) saturate(145%);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .mobile-menu-toggle:focus {
+    outline: none;
+  }
+
+  .mobile-menu-toggle:focus-visible {
+    outline: 1px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
+    border-radius: 3px;
   }
 
   .mobile-menu-toggle span {
     display: block;
-    width: 16px;
+    width: 18px;
     height: 1.5px;
+    flex: 0 0 auto;
     border-radius: 2px;
     background: #fff;
-    transition: transform 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      opacity 0.2s ease;
   }
 
   .mobile-menu-toggle[aria-expanded="true"] span:first-child {
@@ -87,6 +100,11 @@
   .mobile-menu-toggle[aria-expanded="true"] span:last-child {
     transform: translateY(-3.25px) rotate(-45deg);
   }
+
+  /* =========================================================
+     GLASS MENU — DARK FROSTED GLASS
+     The moving orb remains visible behind the blurred menu.
+  ========================================================= */
 
   .navbar nav {
     display: none;
@@ -98,16 +116,31 @@
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    border: 1px solid rgba(240, 255, 232, 0.28);
-    border-radius: 20px;
-    /* iOS-style glass: green tint stays subtle so the background shows through. */
-    background: rgba(105, 166, 82, 0.20);
+
+    /* Subtle glass edge. */
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 22px;
+
+    /* Dark translucent background: visible, but not too transparent. */
+    background: rgba(10, 18, 13, 0.1);
+
+    /* Strong blur for the orb and other elements behind the menu. */
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
+
+    /* Glass reflections and depth. */
     box-shadow:
-      0 18px 48px rgba(0, 0, 0, 0.20),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(34px) saturate(175%) brightness(1.06);
-    -webkit-backdrop-filter: blur(34px) saturate(175%) brightness(1.06);
+      0 16px 44px rgba(0, 0, 0, 0.28),
+      0 4px 12px rgba(0, 0, 0, 0.16),
+      inset 0 1px 1px rgba(255, 255, 255, 0.22),
+      inset 1px 0 1px rgba(255, 255, 255, 0.07),
+      inset -1px 0 1px rgba(255, 255, 255, 0.06),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.08);
+
+    isolation: isolate;
+    overflow: hidden;
+    transform-origin: top right;
+    animation: mobile-glass-menu-in 0.22s ease-out;
   }
 
   .navbar nav.mobile-menu-open {
@@ -117,14 +150,52 @@
   .navbar nav a {
     display: block;
     padding: 15px 14px;
-    border-radius: 10px;
+    border-radius: 12px;
     color: #fff !important;
     font-size: 11px;
     letter-spacing: 0.08em;
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
   }
 
   .navbar nav a::after {
     display: none;
+  }
+
+  .navbar nav a:active,
+  .navbar nav a:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+  }
+
+  @keyframes mobile-glass-menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.97);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* =========================================================
+   TABLET NAVIGATION — KEEP DESKTOP LAYOUT UNCHANGED
+========================================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .navbar nav {
+    right: 4vw;
   }
 }
 
@@ -194,87 +265,15 @@
     font-size: 24px;
   }
 
-  .mobile-menu-toggle {
-    display: flex;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    flex: 0 0 auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    border: 1px solid rgba(181, 232, 76, 0.38);
-    border-radius: 50%;
-    background: rgba(181, 232, 76, 0.12);
-    color: #fff;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    backdrop-filter: blur(14px) saturate(145%);
-    -webkit-backdrop-filter: blur(14px) saturate(145%);
-  }
-
-  .mobile-menu-toggle span {
-    display: block;
-    width: 16px;
-    height: 1.5px;
-    border-radius: 2px;
-    background: #fff;
-    transition: transform 0.25s ease;
-  }
-
-  .mobile-menu-toggle[aria-expanded="true"] span:first-child {
-    transform: translateY(3.25px) rotate(45deg);
-  }
-
-  .mobile-menu-toggle[aria-expanded="true"] span:last-child {
-    transform: translateY(-3.25px) rotate(-45deg);
-  }
+  /* ---------- dropdown position on mobile ---------- */
 
   .navbar nav {
-    display: none;
-    position: absolute;
-    top: calc(100% - 2px);
     right: 16px;
     width: min(270px, calc(100vw - 32px));
-    padding: 12px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    border: 1px solid rgba(240, 255, 232, 0.28);
-    border-radius: 20px;
-    /* iOS-style glass: green tint stays subtle so the background shows through. */
-    background: rgba(105, 166, 82, 0.20);
-    box-shadow:
-      0 18px 48px rgba(0, 0, 0, 0.20),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(34px) saturate(175%) brightness(1.06);
-    -webkit-backdrop-filter: blur(34px) saturate(175%) brightness(1.06);
-  }
-
-  .navbar nav.mobile-menu-open {
-    display: flex;
   }
 
   .navbar nav a {
-    display: block;
-    padding: 15px 14px;
-    border-radius: 10px;
-    color: #fff !important;
     font-size: 11px;
-    letter-spacing: 0.08em;
-    transition: background 0.2s ease;
-  }
-
-  .navbar nav a:active,
-  .navbar nav a:focus-visible {
-    background: rgba(181, 232, 76, 0.22);
-    outline: none;
-  }
-
-  .navbar nav a::after {
-    display: none;
   }
 
   .menu-status {
@@ -353,7 +352,7 @@
 
   .hero-orbit-3d {
     z-index: 5;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .hero-bottom {
@@ -885,7 +884,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .status-dot,
-  .scroll-arrow {
+  .scroll-arrow,
+  .navbar nav {
     animation: none !important;
   }
 }
