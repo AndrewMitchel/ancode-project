@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const closeOnEscape = (event) => {
-      if (event.key === "Escape") setMenuOpen(false);
-    };
-
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, []);
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className={`navbar${menuOpen ? " navbar-menu-open" : ""}`}>
+    <header className="navbar">
       <a href="#" className="logo" onClick={closeMenu}>
         ancode.
       </a>
@@ -28,18 +19,30 @@ function Navbar() {
         aria-controls="primary-navigation"
         onClick={() => setMenuOpen((open) => !open)}
       >
-        <span>{menuOpen ? "CLOSE" : "MENU"}</span>
-        <span className="mobile-menu-icon" aria-hidden="true">
-          <span />
-          <span />
-        </span>
+        <span />
+        <span />
       </button>
 
-      <nav id="primary-navigation" className={menuOpen ? "is-open" : ""}>
-        <a href="#PRODUCT" onClick={closeMenu}>PRODUCT</a>
-        <a href="#services" onClick={closeMenu}>SERVICES</a>
-        <a href="#joki-tugas" onClick={closeMenu}>JOKI TUGAS</a>
-        <a href="#contact" onClick={closeMenu}>CONTACT</a>
+      <nav
+        id="primary-navigation"
+        className={menuOpen ? "mobile-menu-open" : ""}
+        aria-label="Main navigation"
+      >
+        <a href="#PRODUCT" onClick={closeMenu}>
+          PRODUCT
+        </a>
+
+        <a href="#services" onClick={closeMenu}>
+          SERVICES
+        </a>
+
+        <a href="#joki-tugas" onClick={closeMenu}>
+          JOKI TUGAS
+        </a>
+
+        <a href="#contact" onClick={closeMenu}>
+          CONTACT
+        </a>
       </nav>
 
       <div className="menu-status">

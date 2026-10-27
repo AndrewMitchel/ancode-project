@@ -791,88 +791,70 @@ function HeroOrbit3D() {
     let currentRotationY = 0;
 
 
+    let activePointerId = null;
+
     const pointerDown =
       (event) => {
+        // Capture touch pointers so dragging keeps working if the finger
+        // moves outside the canvas while rotating the 3D sphere.
+        if (event.pointerType === "touch") {
+          event.preventDefault();
+          activePointerId = event.pointerId;
+          try {
+            renderer.domElement.setPointerCapture(event.pointerId);
+          } catch (_) {
+            // Some browsers may not support capture for this pointer.
+          }
+        }
+
         dragging = true;
 
-        previousX =
-          event.clientX;
-
-        previousY =
-          event.clientY;
-
-        renderer.domElement.style.cursor =
-          "grabbing";
+        previousX = event.clientX;
+        previousY = event.clientY;
+        renderer.domElement.style.cursor = "grabbing";
       };
-
 
     const pointerMove =
       (event) => {
-        if (!dragging) {
-          return;
-        }
+        if (!dragging) return;
+        if (activePointerId !== null && event.pointerId !== activePointerId) return;
 
+        const dx = event.clientX - previousX;
+        const dy = event.clientY - previousY;
 
-        const dx =
-          event.clientX -
-          previousX;
+        previousX = event.clientX;
+        previousY = event.clientY;
 
-
-        const dy =
-          event.clientY -
-          previousY;
-
-
-        previousX =
-          event.clientX;
-
-
-        previousY =
-          event.clientY;
-
-
-        targetRotationY +=
-          dx * 0.006;
-
-
-        targetRotationX +=
-          dy * 0.004;
-
-
-        targetRotationX =
-          THREE.MathUtils.clamp(
-            targetRotationX,
-
-            -1.2,
-
-            1.2
-          );
+        targetRotationY += dx * 0.006;
+        targetRotationX += dy * 0.004;
+        targetRotationX = THREE.MathUtils.clamp(targetRotationX, -1.2, 1.2);
       };
-
 
     const pointerUp =
-      () => {
+      (event) => {
+        if (activePointerId !== null && event.pointerId !== activePointerId) return;
         dragging = false;
-
-        renderer.domElement.style.cursor =
-          "grab";
+        activePointerId = null;
+        renderer.domElement.style.cursor = "grab";
       };
-
 
     renderer.domElement.addEventListener(
       "pointerdown",
       pointerDown
     );
 
-
     window.addEventListener(
       "pointermove",
       pointerMove
     );
 
-
     window.addEventListener(
       "pointerup",
+      pointerUp
+    );
+
+    window.addEventListener(
+      "pointercancel",
       pointerUp
     );
 
@@ -1121,6 +1103,11 @@ function HeroOrbit3D() {
 
       window.removeEventListener(
         "pointerup",
+        pointerUp
+      );
+
+      window.removeEventListener(
+        "pointercancel",
         pointerUp
       );
 

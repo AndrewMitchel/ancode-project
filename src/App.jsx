@@ -44,11 +44,8 @@ gsap.registerPlugin(ScrollTrigger);
 ===================================================== */
 
 function ScrollToTop() {
-  const {
-    pathname,
-    search,
-    hash,
-  } = useLocation();
+  const location = useLocation();
+  const { pathname, search, hash, state } = location;
 
   const previousPathRef =
     useRef(pathname);
@@ -318,7 +315,7 @@ function ScrollToTop() {
 
     if (
       pathname === "/" &&
-      comingFromProject
+      (comingFromProject || state?.restoreWorkScroll === true)
     ) {
 
       const savedScroll =
@@ -407,6 +404,19 @@ function ScrollToTop() {
             restoreLandingScroll();
           }, 600);
 
+        const timer4 =
+          window.setTimeout(() => {
+            restoreLandingScroll();
+            ScrollTrigger.refresh();
+            restoreLandingScroll();
+          }, 1000);
+
+        const timer5 =
+          window.setTimeout(() => {
+            restoreLandingScroll();
+          }, 1500);
+
+        previousPathRef.current = pathname;
 
         return () => {
 
@@ -420,6 +430,14 @@ function ScrollToTop() {
 
           window.clearTimeout(
             timer3
+          );
+
+          window.clearTimeout(
+            timer4
+          );
+
+          window.clearTimeout(
+            timer5
           );
 
         };
@@ -464,6 +482,7 @@ function ScrollToTop() {
     pathname,
     search,
     hash,
+    state,
   ]);
 
 

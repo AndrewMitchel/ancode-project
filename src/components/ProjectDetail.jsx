@@ -684,7 +684,10 @@ function ProjectDetail({ project }) {
             PROJECT NOT FOUND
           </h1>
 
-          <Link to="/">
+          <Link
+            to="/"
+            state={{ restoreWorkScroll: true }}
+          >
             BACK TO WORK ↗
           </Link>
         </div>
@@ -738,7 +741,10 @@ function ProjectDetail({ project }) {
               CASE STUDY
             </span>
 
-            <Link to="/">
+            <Link
+              to="/"
+              state={{ restoreWorkScroll: true }}
+            >
               BACK TO WORK{" "}
               <b>↗</b>
             </Link>
@@ -1213,6 +1219,7 @@ function ProjectDetail({ project }) {
                 ? `/project/${nextProject.slug}`
                 : "/"
             }
+            state={!nextProject?.slug ? { restoreWorkScroll: true } : undefined}
             className="case-next-link"
           >
             <div className="case-next-title">
@@ -1247,7 +1254,10 @@ function ProjectDetail({ project }) {
             {project.title}
           </span>
 
-          <Link to="/">
+          <Link
+            to="/"
+            state={{ restoreWorkScroll: true }}
+          >
             BACK TO WORK ↗
           </Link>
         </footer>
