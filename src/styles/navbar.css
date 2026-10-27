@@ -72,3 +72,151 @@
 
   background: #111;
 }
+
+/* =========================================================
+   TABLET + MOBILE NAVIGATION
+   Desktop navigation above 1024px remains unchanged.
+========================================================= */
+.mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .navbar {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 40px;
+    padding: 10px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 15px;
+  }
+
+  .mobile-menu-icon span {
+    display: block;
+    width: 15px;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.2s ease;
+  }
+
+  .navbar-menu-open .mobile-menu-icon span:first-child {
+    transform: translateY(2.5px) rotate(45deg);
+  }
+
+  .navbar-menu-open .mobile-menu-icon span:last-child {
+    transform: translateY(-2.5px) rotate(-45deg);
+  }
+
+  .navbar nav {
+    display: none;
+    position: absolute;
+    top: calc(100% - 2px);
+    right: 4vw;
+    z-index: 110;
+    width: min(320px, calc(100vw - 32px));
+    padding: 10px;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(127, 127, 127, 0.35);
+    border-radius: 16px;
+    background: #f2f1ed;
+    color: #111;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  }
+
+  .navbar nav.is-open {
+    display: flex;
+  }
+
+  .navbar nav a {
+    display: block;
+    padding: 15px 13px;
+    border-radius: 9px;
+    outline-offset: 3px;
+  }
+
+  .navbar nav a:active {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .navbar nav a::after {
+    display: none;
+  }
+
+  .menu-status {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    padding: 20px;
+  }
+
+  .mobile-menu-toggle {
+    gap: 7px;
+    min-height: 38px;
+    padding: 9px 10px;
+    font-size: 8px;
+  }
+
+  .navbar nav {
+    right: 20px;
+    width: min(300px, calc(100vw - 40px));
+  }
+
+  .menu-status {
+    font-size: 7px;
+    gap: 5px;
+  }
+
+  .menu-status span {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+  }
+
+  /* Keep project cards clearly tappable on touch screens. */
+  .project-card {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .project-card:active .project-visual {
+    transform: scale(0.99);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .project-card:active .visual-arrow {
+    transform: translate(3px, -3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-icon span {
+    transition: none;
+  }
+}
