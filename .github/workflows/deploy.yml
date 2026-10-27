@@ -1,0 +1,56 @@
+
+name: Deploy Portfolio
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React and Vite
+        run: npm run build
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
+          tags: tag:ci
+          ping: 100.72.158.20
+
+      - name: Configure SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 100.72.158.20 >> ~/.ssh/known_hosts
+
+      - name: Deploy website
+        run: |
+          rsync -av \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            dist/ \
+            adminserver@100.72.158.20:/var/www/portfolio/
