@@ -947,6 +947,11 @@
 
 }
 
+.case-showcase-caption strong,
+.case-vertical-caption strong {
+  color: var(--case-accent);
+}
+
 .case-showcase-caption-top {
 
   display: flex;
